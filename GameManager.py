@@ -7,8 +7,12 @@ from GoblinTypes import Slow
 from GoblinTypes import Fast
 from GoblinTypes import Normal
 from GoblinTypes import Dumb
+from GoblinTypes import GlobalGoblinVars
 
+#global vars
 gameversion = 0.1
+GoblinTypesList = GlobalGoblinVars.GlobalGoblinTypesList
+GoblinBaseStats = GlobalGoblinVars.GlobalGoblinBaseStatsList
 
 #func's
 def LevelUp():

@@ -56,3 +56,13 @@ class Normal:
         self.statHealth = 5
         self.statDamage = 5
         self.appliedEffect = "none"
+
+
+#Global Vars including Typelist
+class GlobalGoblinVars:
+    GoblinBaseSpeed = 1
+    GoblinBaseArmor = 0
+    GoblinBaseHealth = 0
+    GoblinBaseDamage = 0
+    GlobalGoblinTypesList = {"Slimy": Slimy(), "Tough": Tough(), "Dumb": Dumb(), "Normal": Normal(), "Slow": Slow(), "Fast": Fast()}
+    GlobalGoblinBaseStatsList = {"Spe": GoblinBaseSpeed, "Arm": GoblinBaseArmor, "Hea": GoblinBaseHealth, "Dam": GoblinBaseDamage}
