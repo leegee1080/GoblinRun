@@ -1,18 +1,8 @@
 from GoblinClass import Goblin
-
-#import types
-from GoblinTypes import Slimy
-from GoblinTypes import Tough
-from GoblinTypes import Slow
-from GoblinTypes import Fast
-from GoblinTypes import Normal
-from GoblinTypes import Dumb
-from GoblinTypes import GlobalGoblinVars
+from PlayerClass import Player
 
 #global vars
 gameversion = 0.1
-GoblinTypesList = GlobalGoblinVars.GlobalGoblinTypesList
-GoblinBaseStats = GlobalGoblinVars.GlobalGoblinBaseStatsList
 
 #func's
 def LevelUp():
@@ -29,7 +19,7 @@ def LevelUp():
             print("Health increase")
             break
         if val == "Str" or val == "str":
-            print("Strengh increase")
+            print("Strength increase")
             break
         else:
             print("Try again.")
