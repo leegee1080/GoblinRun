@@ -28,5 +28,5 @@ class Goblin:
         self.StatSheetForPrint.append("Health: " + str(self.health))
         self.StatSheetForPrint.append("Damage: " + str(self.damage))
         self.StatSheetForPrint.append("Effect: " + str(self.effect))
-        print(self.StatDict)
+        print(self.StatSheetForPrint)
         return
