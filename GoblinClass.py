@@ -9,13 +9,13 @@ from GoblinTypes import GlobalGoblinVars
 class Goblin:
     StatSheetForPrint = []
 
-    def __init__(self, type, level):
-        self.type = type
+    def __init__(self, newtype, level):
+        self.type = GlobalGoblinVars.GlobalGoblinTypesList[newtype]
         self.level = level
-        self.speed = GlobalGoblinVars.GlobalGoblinBaseStatsList["Spe"] + self.type.statSpeed
-        self.health = GlobalGoblinVars.GlobalGoblinBaseStatsList["Arm"] + self.type.statSpeed
-        self.armor = GlobalGoblinVars.GlobalGoblinBaseStatsList["Hea"] + self.type.statSpeed
-        self.damage = GlobalGoblinVars.GlobalGoblinBaseStatsList["Dam"] + self.type.statSpeed
+        self.speed = GlobalGoblinVars.GlobalGoblinBaseStatsList["Spe"] + self.type.statSpeed + level
+        self.health = GlobalGoblinVars.GlobalGoblinBaseStatsList["Arm"] + self.type.statSpeed + level
+        self.armor = GlobalGoblinVars.GlobalGoblinBaseStatsList["Hea"] + self.type.statSpeed + level
+        self.damage = GlobalGoblinVars.GlobalGoblinBaseStatsList["Dam"] + self.type.statSpeed + level
         self.effect = self.type.appliedEffect
 
     

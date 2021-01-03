@@ -3,6 +3,7 @@ from PlayerClass import Player
 
 #global vars
 gameversion = 0.1
+CurrentPlayer = Player(1,1,1,1)
 
 #func's
 def LevelUp():
@@ -13,17 +14,18 @@ def LevelUp():
     val = input("Type the 3 letter stat you would like to increase: ")
     while True:
         if val == "Spd" or val == "spd":
-            print("Speed increase")
+            CurrentPlayer.increaseSpeed(1)
             break
         if val == "Hth" or val == "hth":
-            print("Health increase")
+            CurrentPlayer.increaseHealth(1)
             break
         if val == "Str" or val == "str":
-            print("Strength increase")
+            CurrentPlayer.increaseStrength(1)
             break
         else:
             print("Try again.")
             val = input("Type the 3 letter stat you would like to increase: ")
+    CurrentPlayer.increaseLevel(1)
     return
 
 
@@ -40,5 +42,7 @@ input("Time to clear them out. (Press Enter)")
 input("See how far you can get. (Press Enter)")
 
 LevelUp()
-# Goblin1 = Goblin(Slimy(), 1)
+
+# Goblin1 = Goblin("Slimy", 1)
 # Goblin1.printStatSheet()
+CurrentPlayer.printStatSheet()
