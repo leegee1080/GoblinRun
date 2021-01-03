@@ -1,6 +1,11 @@
 from GoblinClass import Goblin
 from PlayerClass import Player
 
+# if __name__ == "__main__":
+#     # execute only if run as a script
+#     main()
+
+
 #global vars
 gameversion = 0.1
 CurrentPlayer = Player(1,1,1,1)

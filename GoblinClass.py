@@ -1,10 +1,11 @@
-from GoblinTypes import Slimy
-from GoblinTypes import Tough
-from GoblinTypes import Slow
-from GoblinTypes import Fast
-from GoblinTypes import Normal
-from GoblinTypes import Dumb
+# from GoblinTypes import Slimy
+# from GoblinTypes import Tough
+# from GoblinTypes import Slow
+# from GoblinTypes import Fast
+# from GoblinTypes import Normal
+# from GoblinTypes import Dumb
 from GoblinTypes import GlobalGoblinVars
+# from GoblinTypes import *
 
 class Goblin:
     StatSheetForPrint = []

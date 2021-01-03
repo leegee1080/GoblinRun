@@ -1,3 +1,5 @@
+# __all__ = ['GlobalGoblinVars']
+
 class Slimy:
     def __init__(self):
         self.name = "Slimy"
