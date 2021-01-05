@@ -4,7 +4,7 @@
 # from GoblinTypes import Fast
 # from GoblinTypes import Normal
 # from GoblinTypes import Dumb
-from GoblinTypes import GlobalGoblinVars
+from src.GoblinTypes import GlobalGoblinVars
 # from GoblinTypes import *
 
 class Goblin:
