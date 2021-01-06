@@ -1,5 +1,4 @@
 class Player:
-    StatSheetForPrint = []
 
     def __init__(self, level, speed, startingHealth, strength, currentXp, XpToLevel):
         self.level = level
@@ -11,44 +10,44 @@ class Player:
         self.XpToLevel = XpToLevel
     
     def printStatSheet(self):
-        self.StatSheetForPrint.clear
-        self.StatSheetForPrint.append("Level: " + str(self.level))
-        self.StatSheetForPrint.append("Speed: " + str(self.speed))
-        self.StatSheetForPrint.append("Max Health: " + str(self.maxHealth))
-        self.StatSheetForPrint.append("Current Health: " + str(self.health))
-        self.StatSheetForPrint.append("Strength: " + str(self.strength))
-        self.StatSheetForPrint.append("Experience: {} out of {} till next level.".format(self.currentXp, self.XpToLevel))
-        print(self.StatSheetForPrint)
+        print("--------------Player Stats-------------")
+        print("----------Level: " + str(self.level))
+        print("----------Speed: " + str(self.speed))
+        print("-----Max Health: " + str(self.maxHealth))
+        print("-Current Health: " + str(self.health))
+        print("-------Strength: " + str(self.strength))
+        print("{} out of {} experience till next level.".format(self.currentXp, self.XpToLevel))
+        print("---------------------------------------\n")
         return
     
     def increaseStrength(self, Amount):
         self.strength = self.strength + Amount
-        print("Strength went up!")
+        print("----------Strength went up!----------")
         return
     
     def increaseSpeed(self, Amount):
         self.speed = self.speed + Amount
-        print("Speed went up!")
+        print("----------Speed went up!----------")
         return
 
     def increaseHealth(self, Amount):
         self.maxHealth = self.maxHealth + Amount
-        print("Max Health went up!")
+        print("----------Max Health went up!----------")
         return
 
     def increaseLevel(self, Amount):
         self.level = self.level + Amount
-        print("Level went up!")
+        print("----------Level went up!----------")
         return
     
     def HealPlayer(self, Amount):
         healthDif = self.maxHealth - self.health
         if Amount <= healthDif:
             self.health = self.health + Amount
-            print("Healed: " + str(Amount))
+            print("Healed: " + str(Amount) + "\n")
         else:
             self.health = self.maxHealth
-            print("Full Health!")
+            print("Full Health!\n")
         return
     
     def DamagePlayer(self, Amount):
@@ -58,11 +57,12 @@ class Player:
         return
     
     def LevelUp(self):
-        input("You have leveled up. (Press Enter)")
-        print("Spd")
-        print("Hth")
-        print("Str")
+        input("----------You have leveled up!---------- (Press Enter)")
+        print("-----> Spd")
+        print("-----> Hth")
+        print("-----> Str")
         val = input("Type the 3 letter stat you would like to increase: ")
+        print("---------------------------------------")
         while True:
             if val == "Spd" or val == "spd":
                 self.increaseSpeed(1)
