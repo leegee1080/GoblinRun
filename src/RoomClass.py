@@ -23,7 +23,7 @@ class Room:
         print("loot")
         return
 
-    #disabled loot room type for now. just change the 1 to a 2 in the randint to turn it back on
+    #disabled loot room type for now. just change the 5 to a 6 in the randint to turn it back on
     def determineroomtype(self, currentplayer, difficultylevel):
         self.randint = random.randint(0,5)
         switch = {

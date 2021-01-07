@@ -30,8 +30,13 @@ class Fight:
         return
     
     def runFight(self):
-        # while(True):
-        print("fight")
+        self.fightstatus = True
+        while(fightstatus):
+            print("debug: fight start")
+            print("~~~Your Attack!~~~")
+            self.playertargetStr = input("Which Goblin do you target?")
+            
+            fightstatus = False
         return
 
 

@@ -17,6 +17,7 @@ class Goblin:
         self.armor = GlobalGoblinVars.GlobalGoblinBaseStatsList["Hea"] + self.type.statSpeed + level
         self.damage = GlobalGoblinVars.GlobalGoblinBaseStatsList["Dam"] + self.type.statSpeed + level
         self.effect = self.type.appliedEffect
+        self.alive = True
 
     
     def printStatSheet(self):
@@ -28,3 +29,8 @@ class Goblin:
         print("Damage: " + str(self.damage))
         print("Effect: " + str(self.effect))
         return
+
+    def takedamage(self, amount):
+        self.health -= amount
+        if (self.health <= 0):
+            self.alive = False
