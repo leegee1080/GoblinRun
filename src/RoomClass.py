@@ -22,24 +22,28 @@ class Room:
     def loot(self,currentplayer, difficultylevel):
         print("loot")
         return
-    
-    def determineroomtype(self, randNum, currentplayer, difficultylevel):
+
+    #disabled loot room type for now. just change the 1 to a 2 in the randint to turn it back on
+    def determineroomtype(self, currentplayer, difficultylevel):
+        self.randint = random.randint(0,5)
         switch = {
             0: self.fight,
-            1: self.rest,
-            2: self.loot
+            1: self.fight,
+            2: self.fight,
+            3: self.fight,
+            4: self.fight,
+            5: self.rest,
+            6: self.loot
         }
-        self.func = switch.get(randNum, lambda: "Invalid Room Type!")
+        self.func = switch.get(self.randint, lambda: "Invalid Room Type!")
         self.func(currentplayer, difficultylevel)
         return
 
 
-    #disabled loot room type for now. just change the 1 to a 2 in the randint to turn it back on
     def __init__(self, playerlevel, difficultylevel, currentplayer):
         self.playerlevel = playerlevel
         self.difficultylevel = difficultylevel
         self.currentplayer = currentplayer
-        self.randint = random.randint(0,1)
-        self.determineroomtype(self.randint, currentplayer, difficultylevel)
+        self.determineroomtype(currentplayer, difficultylevel)
         return
     
