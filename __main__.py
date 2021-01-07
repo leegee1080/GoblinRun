@@ -1,8 +1,8 @@
 from src.GameManager import GlobalVarStorage
-from src.GoblinClass import Goblin
 from src.PlayerClass import Player
 from src.RoomClass import Room
-from src.FightClass import Fight
+# from src.GoblinClass import Goblin
+# from src.FightClass import Fight
 
 gameversion = 0.1
 
@@ -10,11 +10,15 @@ gameversion = 0.1
 CurrentPlayer = Player(1,1,1,1,0,1)
 
 def checkfornextroom():
-    playeranswer = input("Would you like to continue? (Type 'y' or 'n')")
-    if(playeranswer == "y" or playeranswer == "Y" or playeranswer == ""):
-        return True
-    else:
-        return False
+    while(True):
+        playeranswer = input("Would you like to continue? \n (Type 'y' for yes or 'n' for no, or 'stat' for your current stats.)")
+        if(playeranswer == "stat" or playeranswer == "Stat" or playeranswer == "STAT"):
+            CurrentPlayer.printStatSheet()
+            continue
+        if(playeranswer == "y" or playeranswer == "Y" or playeranswer == ""):
+            return True
+        else:
+            return False
 
 #Game Start
 print("GOBLIN RUN             ver: " + str(gameversion))
