@@ -8,10 +8,11 @@ class Room:
         self.newFight = Fight(currentplayer, difficultylevel)
         self.newFight.setupFight()
         self.newFight.runFight()
+        #earn treasure/gold
         return
     
     def rest(self, currentplayer, difficultylevel):
-        # print("rest")
+        #maybe spend gold for more health
         self.freehealamount = random.randint(2,100) / difficultylevel
         input("You find a nice place to rest (Press Enter)")
         input("You are healed {:.0f} health points! (Press Enter)".format(self.freehealamount))

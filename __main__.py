@@ -4,7 +4,7 @@ from src.RoomClass import Room
 # from src.GoblinClass import Goblin
 # from src.FightClass import Fight
 
-gameversion = 0.1
+gameversion = 0.2
 
 #global vars
 CurrentPlayer = Player(1,1,1,1,0,1)
@@ -34,6 +34,6 @@ while(True):
         newroom = Room(CurrentPlayer.level,1,CurrentPlayer)
         pass
     else:
-        print("You run back the way you came.\n You escape the goblin cave.")
+        print("You run back the way you came.\nYou escape the goblin cave.")
         input("Thanks for playing (Press Enter)")
         break

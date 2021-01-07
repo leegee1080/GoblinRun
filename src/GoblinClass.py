@@ -4,14 +4,13 @@
 # from GoblinTypes import Fast
 # from GoblinTypes import Normal
 # from GoblinTypes import Dumb
+import random
 from src.GoblinTypes import GlobalGoblinVars
 # from GoblinTypes import *
 
 class Goblin:
-    StatSheetForPrint = []
-
-    def __init__(self, newtype, level):
-        self.type = GlobalGoblinVars.GlobalGoblinTypesList[newtype]
+    def __init__(self, level):
+        self.type = GlobalGoblinVars.GlobalGoblinTypesList[random.randint(0, len(GlobalGoblinVars.GlobalGoblinTypesList)-1)]
         self.level = level
         self.speed = GlobalGoblinVars.GlobalGoblinBaseStatsList["Spe"] + self.type.statSpeed + level
         self.health = GlobalGoblinVars.GlobalGoblinBaseStatsList["Arm"] + self.type.statSpeed + level
@@ -21,13 +20,11 @@ class Goblin:
 
     
     def printStatSheet(self):
-        self.StatSheetForPrint.clear
-        self.StatSheetForPrint.append("Type: " + self.type.name)
-        self.StatSheetForPrint.append("Level: " + str(self.level))
-        self.StatSheetForPrint.append("Speed: " + str(self.speed))
-        self.StatSheetForPrint.append("Armor: " + str(self.armor))
-        self.StatSheetForPrint.append("Health: " + str(self.health))
-        self.StatSheetForPrint.append("Damage: " + str(self.damage))
-        self.StatSheetForPrint.append("Effect: " + str(self.effect))
-        print(self.StatSheetForPrint)
+        print("Type: " + self.type.name)
+        print("Level: " + str(self.level))
+        print("Speed: " + str(self.speed))
+        print("Armor: " + str(self.armor))
+        print("Health: " + str(self.health))
+        print("Damage: " + str(self.damage))
+        print("Effect: " + str(self.effect))
         return
