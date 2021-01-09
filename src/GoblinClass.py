@@ -13,8 +13,8 @@ class Goblin:
         self.type = GlobalGoblinVars.GlobalGoblinTypesList[random.randint(0, len(GlobalGoblinVars.GlobalGoblinTypesList)-1)]
         self.level = level
         self.speed = GlobalGoblinVars.GlobalGoblinBaseStatsList["Spe"] + self.type.statSpeed + level
-        self.health = GlobalGoblinVars.GlobalGoblinBaseStatsList["Arm"] + self.type.statSpeed + level
-        self.armor = GlobalGoblinVars.GlobalGoblinBaseStatsList["Hea"] + self.type.statSpeed + level
+        self.health = GlobalGoblinVars.GlobalGoblinBaseStatsList["Hea"] + self.type.statSpeed + level
+        self.armor = GlobalGoblinVars.GlobalGoblinBaseStatsList["Arm"] + self.type.statSpeed + level
         self.damage = GlobalGoblinVars.GlobalGoblinBaseStatsList["Dam"] + self.type.statSpeed + level
         self.effect = self.type.appliedEffect
         self.alive = True

@@ -7,7 +7,7 @@ from src.RoomClass import Room
 gameversion = 0.2
 
 #global vars
-CurrentPlayer = Player(1,1,1,1,0,1)
+CurrentPlayer = Player(1,1,10,2,0,1)
 
 def checkfornextroom():
     while(True):
@@ -24,8 +24,9 @@ def checkfornextroom():
 print("GOBLIN RUN             ver: " + str(gameversion))
 
 input("You enter a goblin den. (Press Enter)")
-input("Time to clear them out. (Press Enter)")
-input("See how far you can get. (Press Enter)")
+input("Time to clear them out. \nSee how far you can get. (Press Enter)")
+print("\n")
+
 
 
 newroom = Room(CurrentPlayer.level,1,CurrentPlayer)
