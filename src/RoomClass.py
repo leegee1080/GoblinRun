@@ -25,17 +25,16 @@ class Room:
 
     #disabled loot room type for now. just change the 5 to a 6 in the randint to turn it back on
     def determineroomtype(self, currentplayer, difficultylevel):
-        self.randint = random.randint(0,5)
-        switch = {
-            0: self.fight,
-            1: self.fight,
-            2: self.fight,
-            3: self.fight,
-            4: self.fight,
-            5: self.rest,
-            6: self.loot
-        }
-        self.func = switch.get(self.randint, lambda: "Invalid Room Type!")
+        switch = [
+            self.fight,
+            self.fight,
+            self.fight,
+            self.rest,
+            self.loot
+        ]
+        self.randint = random.randint(0,len(switch)-1)
+        self.func = switch[self.randint]
+        #(self.randint, lambda: "Invalid Room Type!")
         self.func(currentplayer, difficultylevel)
         return
 

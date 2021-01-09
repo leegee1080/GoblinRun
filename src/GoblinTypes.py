@@ -33,7 +33,7 @@ class Fast:
 class Slow:
     def __init__(self):
         self.name = "Slow"
-        self.statSpeed = 1
+        self.statSpeed = 0
         self.statArmor = 5
         self.statHealth = 5
         self.statDamage = 5
@@ -43,10 +43,10 @@ class Slow:
 class Dumb:
     def __init__(self):
         self.name = "Dumb"
-        self.statSpeed = 2
-        self.statArmor = 2
-        self.statHealth = 2
-        self.statDamage = 2
+        self.statSpeed = 1
+        self.statArmor = 1
+        self.statHealth = 1
+        self.statDamage = 1
         self.appliedEffect = "none"
 
 

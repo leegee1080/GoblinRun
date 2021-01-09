@@ -8,8 +8,19 @@ class Fight:
         self.currentplayer = currentplayer
         return
 
+    def findTurnCounterMaximums(self, goblistParam, currentplayerParam):
+        self.TurnCounterMax = currentplayerParam.speed
+        self.TurnCounterMin = currentplayerParam.speed
+        for gob in goblistParam:
+            if(gob.speed > self.TurnCounterMax):
+                self.TurnCounterMax = gob.speed
+            if(gob.speed < self.TurnCounterMin):
+                self.TurnCounterMin = gob.speed
+        #input("DEBUG turncountermax: {}, turncountermin: {}".format(self.TurnCounterMax, self.TurnCounterMin))
+        return
+
     def setupFight(self): 
-        print("There is movement up ahead! Goblins!\nThere are {} goblin{}.".format(self.numberofGobs, "s" if self.numberofGobs != 1 else ""))
+        print("\nThere is movement up ahead! Goblins!\nThere {} {} goblin{}.".format("are" if self.numberofGobs != 1 else "is", self.numberofGobs, "s" if self.numberofGobs != 1 else ""))
         self.counter = 0
         self.gobList = []
         self.gobString = ""
@@ -29,6 +40,7 @@ class Fight:
         self.gobString += "(Press Enter)"
         input(self.gobString)
         print("\n")
+        self.findTurnCounterMaximums(self.gobList, self.currentplayer)
         return
 
     def checkPlayerdead(self):
@@ -50,45 +62,66 @@ class Fight:
         else:
             return False
     
+    def playerTurn(self):
+        print("~~~Your Turn!~~~")
+        self.counter = 0
+        self.gobString = ""
+        while (self.counter < self.numberofGobs):
+            self.gobString = self.gobString + "{}--> The level {} {} one. {}".format(self.counter + 1, self.gobList[self.counter].level, self.gobList[self.counter].type.name, "(Dead)" if self.gobList[self.counter].health <= 0 else "")
+            self.gobString += "\n"
+            self.counter += 1
+        print(self.gobString)
+        self.playerPickingTarget = True
+        while(self.playerPickingTarget):
+            try:
+                self.playertargetInt = int(input("Which Goblin do you target? (1 to {})".format(len(self.gobList)))) -1
+                pass
+            except ValueError:
+                print("Invalid Target! (Needs to be a number)")
+                continue
+            try:
+                self.test = self.gobList[self.playertargetInt]
+                break
+            except IndexError:
+                print("Invalid Target!")
+                continue    
+        print("You attack the level {} {} one.\n".format(self.gobList[self.playertargetInt].level, self.gobList[self.playertargetInt].type.name))
+        self.gobList[self.playertargetInt].takedamage(self.currentplayer.strength)
+        print("You do {} damage! The goblin has {} health left.".format(self.currentplayer.strength, self.gobList[self.playertargetInt].health))
+        if(self.gobList[self.playertargetInt].health <= 0):
+            print("You killed it!\n")
+        return
+
+    def gobTurn(self, gobParam):
+        if (gobParam.health <= 0):
+            return
+        else:
+            print("\n~~~Level {} {} one attacks!~~~\n".format(gobParam.level, gobParam.type.name))
+            self.currentplayer.DamagePlayer(gobParam.damage)
+            return
+
     def runFight(self):
-        print("debug: start fight")
+        self.turnCounter = self.TurnCounterMax
+        self.whichgobturn = None
+        self.isplayerturn = False
         while(True):
-            print("~~~Your Attack!~~~")
-
-            self.counter = 0
-            self.gobString = ""
-            while (self.counter < self.numberofGobs):
-                self.gobString = self.gobString + "{}: The level {} {} one.".format(self.counter + 1, self.gobList[self.counter].level, self.gobList[self.counter].type.name)
-                self.gobString += "\n"
-                self.counter += 1
-            print(self.gobString)
-            self.playerPickingTarget = True
-            while(self.playerPickingTarget):
-                try:
-                    self.playertargetInt = int(input("Which Goblin do you target? (1 to {})".format(len(self.gobList)))) -1
-                    pass
-                except ValueError:
-                    print("Invalid Target! (Needs to be a number)")
-                    continue
-
-                try:
-                    self.test = self.gobList[self.playertargetInt]
+            if(self.turnCounter == self.currentplayer.speed):
+                self.isplayerturn = True
+                self.whichgobturn = None
+            else:
+                self.isplayerturn = False       
+            for gob in self.gobList:
+                if(self.turnCounter == gob.speed):
+                    self.whichgobturn = gob
                     break
-                except IndexError:
-                    print("Invalid Target!")
-                    continue
-            
-            print("You attack the level {} {} one.\n".format(self.gobList[self.playertargetInt].level, self.gobList[self.playertargetInt].type.name))
-            self.gobList[self.playertargetInt].takedamage(self.currentplayer.strength)
-
-            print("You do {} damage! The goblin has {} health left.".format(self.currentplayer.strength, self.gobList[self.playertargetInt].health))
-
-
-            if(self.gobList[self.playertargetInt].health <= 0):
-                print("You killed it!\n")
+            #print("DEBUG turncounter: {}, playerspeed: {}, chosen gob speed: {}".format(self.turnCounter, self.currentplayer.speed, "None" if self.whichgobturn is None else self.whichgobturn.speed))
+            if (self.isplayerturn):
+                self.playerTurn()
+            if((self.isplayerturn is False) and (self.whichgobturn is not None)):
+                self.gobTurn(self.whichgobturn)
 
             if(self.checkPlayerdead()):
-                print("You are dead!")
+                print("\nThe level {} {} one strikes you with a final blow.".format(self.whichgobturn.level, self.whichgobturn.type.name))
                 break
 
             if(self.checkEnemiesdead()):
@@ -98,5 +131,7 @@ class Fight:
                 print("You killed them all!\nYou gained {} experience points!\n".format(self.playerExpEarned))
                 self.currentplayer.IncreaseXP(self.playerExpEarned)
                 break
-            pass     
+            self.turnCounter -= 1   
+            if(self.turnCounter < self.TurnCounterMin):
+                self.turnCounter = self.TurnCounterMax
         return

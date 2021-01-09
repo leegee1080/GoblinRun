@@ -22,12 +22,12 @@ class Player:
     
     def increaseStrength(self, Amount):
         self.strength = self.strength + Amount
-        print("----------Strength went up!----------")
+        print("----------Strength went up!------------")
         return
     
     def increaseSpeed(self, Amount):
         self.speed = self.speed + Amount
-        print("----------Speed went up!----------")
+        print("----------Speed went up!---------------")
         return
 
     def increaseHealth(self, Amount):
@@ -37,7 +37,7 @@ class Player:
 
     def increaseLevel(self, Amount):
         self.level = self.level + Amount
-        print("----------Level went up!----------")
+        print("----------Level went up!---------------")
         return
     
     def HealPlayer(self, Amount):
@@ -52,8 +52,8 @@ class Player:
     
     def DamagePlayer(self, Amount):
         self.health = self.health - Amount
-        if self.health <= 0:
-            print("player dead")
+        #if self.health <= 0:
+            #print("DEBUG: player dead")
         return
     
     def LevelUp(self):
@@ -65,13 +65,13 @@ class Player:
         print("---------------------------------------")
         while True:
             if val == "Spd" or val == "spd":
-                self.increaseSpeed(1)
+                self.increaseSpeed(5)
                 break
             if val == "Hth" or val == "hth":
-                self.increaseHealth(1)
+                self.increaseHealth(10)
                 break
             if val == "Str" or val == "str":
-                self.increaseStrength(1)
+                self.increaseStrength(5)
                 break
             else:
                 print("Try again.")

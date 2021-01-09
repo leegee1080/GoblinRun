@@ -4,10 +4,11 @@ from src.RoomClass import Room
 # from src.GoblinClass import Goblin
 # from src.FightClass import Fight
 
-gameversion = 0.2
+gameversion = 0.5
 
-#global vars
-CurrentPlayer = Player(1,1,10,2,0,1)
+#----------------global vars----------------
+#player stat key(level, speed, startingHealth, strength, currentXp, XpToLevel)
+CurrentPlayer = Player(1,10,50,5,0,1)
 
 def checkfornextroom():
     while(True):
@@ -31,10 +32,13 @@ print("\n")
 
 newroom = Room(CurrentPlayer.level,1,CurrentPlayer)
 while(True):
+    if(CurrentPlayer.health <=0):
+        print("\n\nYour bones are added to the pile of other adventurers.\nMaybe in the next life you will get farther.")
+        break
     if(checkfornextroom()):
         newroom = Room(CurrentPlayer.level,1,CurrentPlayer)
-        pass
     else:
-        print("You run back the way you came.\nYou escape the goblin cave.")
-        input("Thanks for playing (Press Enter)")
+        print("\n\nYou run back the way you came.\nYou escape the goblin cave.")
         break
+
+input("----->Thanks for playing (Press Enter)")
