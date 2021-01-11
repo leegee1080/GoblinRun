@@ -7,8 +7,8 @@ from src.RoomClass import Room
 gameversion = 0.5
 
 #----------------global vars----------------
-#player stat key(level, speed, startingHealth, strength, currentXp, XpToLevel)
-CurrentPlayer = Player(1,10,50,5,0,1)
+#player stat key(level, speed, startingHealth, strength, currentXp, XpToLevel, startingMoney, equipWeapon, itemList)
+CurrentPlayer = Player(1,10,50,5,0,1,0,None,{})
 
 def checkfornextroom():
     while(True):

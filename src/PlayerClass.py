@@ -1,6 +1,6 @@
 class Player:
 
-    def __init__(self, level, speed, startingHealth, strength, currentXp, XpToLevel):
+    def __init__(self, level, speed, startingHealth, strength, currentXp, XpToLevel, startingMoney, equipWeapon, itemList):
         self.level = level
         self.speed = speed
         self.health = startingHealth
@@ -8,6 +8,9 @@ class Player:
         self.strength = strength
         self.currentXp = currentXp
         self.XpToLevel = XpToLevel
+        self.money = startingMoney
+        self.mainWeapon = equipWeapon
+        self.itemList = itemList
     
     def printStatSheet(self):
         print("--------------Player Stats-------------")
@@ -56,6 +59,11 @@ class Player:
             #print("DEBUG: player dead")
         return
     
+    def PayPlayer(self, Amount):
+        self.money = self.money + Amount
+        print("--------You got {} gold coins!---------".format(Amount))
+        return
+
     def LevelUp(self):
         input("----------You have leveled up!---------- (Press Enter)")
         print("-----> Spd")
