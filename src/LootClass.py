@@ -5,6 +5,8 @@ class Loot:
         self.difflevel = difficultylevel
         self.currentplayer = currentplayer
         return
-    def generateloot(self):
-        #generate loot
-        return
+
+    def randomGenItem(self, playerlevel, difficultylevel):
+        self.newItem = None
+
+        return self.newItem
