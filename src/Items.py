@@ -37,6 +37,7 @@ class Spear:
         self.statPierce = 5
         self.statDamage = 2
         self.statSpecial = "Long"
+        #avoid the next number of attacks equal to the pierce stat on this weapon
 #Weapons End
 
 #Armor
@@ -47,6 +48,7 @@ class Leather:
         self.statMagicProtectChance = 3
         self.statWeaponProtectChance = 5
         self.statSpecial = "Light"
+        #x1.3 to player speed
 
 class Plate:
     def __init__(self):
@@ -55,6 +57,7 @@ class Plate:
         self.statMagicProtectChance = 1
         self.statWeaponProtectChance = 2
         self.statSpecial = "Heavy"
+        #x0.9 to player speed
 
 class Chain:
     def __init__(self):
@@ -63,6 +66,7 @@ class Chain:
         self.statMagicProtectChance = 2
         self.statWeaponProtectChance = 4
         self.statSpecial = "Medium"
+        #x1.1 to player speed
 
 class Cloth:
     def __init__(self):
@@ -71,6 +75,7 @@ class Cloth:
         self.statMagicProtectChance = 9
         self.statWeaponProtectChance = 0
         self.statSpecial = "Loose"
+        #immune to gob applied stat effects
 #Armor End
 
 
