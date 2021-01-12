@@ -74,11 +74,15 @@ class Fight:
         self.playerPickingTarget = True
         while(self.playerPickingTarget):
             try:
-                self.playertargetInt = int(input("Which Goblin do you target? (1 to {})".format(len(self.gobList)))) -1
+                self.playertargetInt = int(input("Which Goblin do you target? (1 to {}) (Type 'stat' to see your stats)".format(len(self.gobList)))) -1
                 pass
             except ValueError:
-                print("Invalid Target! (Needs to be a number)")
-                continue
+                if(self.playertargetInt == "stat" or self.playertargetInt == "Stat" or self.playertargetInt == "STAT"):
+                    self.currentplayer.printStatSheet()
+                    continue
+                else:
+                    print("Invalid Command! (Needs to be a number or 'stat')")
+                    continue
             try:
                 self.test = self.gobList[self.playertargetInt]
                 break
@@ -96,7 +100,8 @@ class Fight:
         if (gobParam.health <= 0):
             return
         else:
-            print("\n~~~Level {} {} one attacks!~~~\n".format(gobParam.level, gobParam.type.name))
+            print("\n~~~Level {} {} one attacks!~~~".format(gobParam.level, gobParam.type.name))
+            print("The goblin hits you for {}\n".format(gobParam.damage))
             self.currentplayer.DamagePlayer(gobParam.damage)
             return
 
