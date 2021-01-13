@@ -26,7 +26,7 @@ class Fast:
         self.statSpeed = 8
         self.statArmor = 3
         self.statHealth = 3
-        self.statDamage = 3
+        self.statDamage = 1
         self.appliedEffect = "none"
 
 
