@@ -56,7 +56,6 @@ class Fight:
                 break
             else:
                 self.deadgobcount += 1
-
         if (self.deadgobcount == len(self.gobList)):
             return True
         else:
@@ -73,11 +72,9 @@ class Fight:
         print(self.gobString)
         while(True):
             self.playerinputstring = input("Which Goblin do you target? (1 to {}) (Type 'stat' to see your stats)".format(len(self.gobList)))
-
             if(self.playerinputstring == "stat" or self.playerinputstring == "Stat" or self.playerinputstring == "STAT"):
                 self.currentplayer.printStatSheet()
                 continue
-
             try:
                 self.playertargetInt = int(self.playerinputstring) -1
                 pass
@@ -86,10 +83,15 @@ class Fight:
                 continue
             try:
                 self.test = self.gobList[self.playertargetInt]
-                break
+                pass
             except IndexError:
                 print("Invalid Target!")
-                continue    
+                continue
+            if(self.gobList[self.playertargetInt].health > 0):
+                break
+            else:
+                print("Target is already dead.")
+                continue
         print("You attack the level {} {} one.\n".format(self.gobList[self.playertargetInt].level, self.gobList[self.playertargetInt].type.name))
         self.gobList[self.playertargetInt].takedamage(self.currentplayer.strength)
         print("You do {} damage! The goblin has {} health left.".format(self.currentplayer.strength, self.gobList[self.playertargetInt].health))
