@@ -71,18 +71,19 @@ class Fight:
             self.gobString += "\n"
             self.counter += 1
         print(self.gobString)
-        self.playerPickingTarget = True
-        while(self.playerPickingTarget):
+        while(True):
+            self.playerinputstring = input("Which Goblin do you target? (1 to {}) (Type 'stat' to see your stats)".format(len(self.gobList)))
+
+            if(self.playerinputstring == "stat" or self.playerinputstring == "Stat" or self.playerinputstring == "STAT"):
+                self.currentplayer.printStatSheet()
+                continue
+
             try:
-                self.playertargetInt = int(input("Which Goblin do you target? (1 to {}) (Type 'stat' to see your stats)".format(len(self.gobList)))) -1
+                self.playertargetInt = int(self.playerinputstring) -1
                 pass
             except ValueError:
-                if(self.playertargetInt == "stat" or self.playertargetInt == "Stat" or self.playertargetInt == "STAT"):
-                    self.currentplayer.printStatSheet()
-                    continue
-                else:
-                    print("Invalid Command! (Needs to be a number or 'stat')")
-                    continue
+                print("Invalid Command! (Needs to be a number or 'stat')")
+                continue
             try:
                 self.test = self.gobList[self.playertargetInt]
                 break
