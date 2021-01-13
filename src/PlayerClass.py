@@ -65,9 +65,9 @@ class Player:
 
     def LevelUp(self):
         input("----------You have leveled up!---------- (Press Enter)")
-        print("-----> Spd")
-        print("-----> Hth")
-        print("-----> Str")
+        print("-----> Type 'Spd' For Speed")
+        print("-----> Type 'Hth' For Max Health")
+        print("-----> Type 'Str' For Strength")
         val = input("Type the 3 letter stat you would like to increase: ")
         print("---------------------------------------")
         while True:

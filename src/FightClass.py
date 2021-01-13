@@ -113,25 +113,23 @@ class Fight:
         self.whichgobturn = None
         self.isplayerturn = False
         while(True):
-            if(self.turnCounter == self.currentplayer.speed):
+            if(self.turnCounter == self.currentplayer.speed or self.isplayerturn == True):
                 self.isplayerturn = True
                 self.whichgobturn = None
-            else:
-                self.isplayerturn = False       
+                self.playerTurn()
+                pass
             for gob in self.gobList:
                 if(self.turnCounter == gob.speed):
                     self.whichgobturn = gob
+                    self.isplayerturn = False
                     break
-            #print("DEBUG turncounter: {}, playerspeed: {}, chosen gob speed: {}".format(self.turnCounter, self.currentplayer.speed, "None" if self.whichgobturn is None else self.whichgobturn.speed))
-            if (self.isplayerturn):
-                self.playerTurn()
-            if((self.isplayerturn is False) and (self.whichgobturn is not None)):
+           
+            if(self.whichgobturn is not None):
                 self.gobTurn(self.whichgobturn)
-
+                pass
             if(self.checkPlayerdead()):
                 print("\nThe level {} {} one strikes you with a final blow.".format(self.whichgobturn.level, self.whichgobturn.type.name))
                 break
-
             if(self.checkEnemiesdead()):
                 self.playerExpEarned = 0
                 for gob in self.gobList:
