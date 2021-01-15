@@ -28,10 +28,10 @@ class Player:
     def printItemList(self):
         print("-----Wielding a {}.".format(self.mainWeapon.name))
         print("------Wearing a {}.".format(self.mainArmor.name))
-        print("----In your Bag:")
+        print("And In your Bag:")
         for i in self.itemList:
             print("A {}.".format(i.name))
-        print("")
+        print("---------------------------------------\n")
     
     def increaseStrength(self, Amount):
         self.strength = self.strength + Amount

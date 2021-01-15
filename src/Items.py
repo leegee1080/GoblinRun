@@ -6,7 +6,7 @@ import random
 class Dagger:
     def __init__(self):
         self.cat = "weapon"
-        self.name = "Dagger"
+        self.name = "Light Dagger"
         self.statSpeed = 4
         self.statPierce = 3
         self.statDamage = 1
@@ -22,7 +22,7 @@ class Dagger:
 class Sword:
     def __init__(self):
         self.cat = "weapon"
-        self.name = "Sword"
+        self.name = "Two-Handed Sword"
         self.statSpeed = 3
         self.statPierce = 3
         self.statDamage = 4
@@ -38,7 +38,7 @@ class Sword:
 class Axe:
     def __init__(self):
         self.cat = "weapon"
-        self.name = "Axe"
+        self.name = "Heavy Axe"
         self.statSpeed = 2
         self.statPierce = 3
         self.statDamage = 5
@@ -54,7 +54,7 @@ class Axe:
 class Spear:
     def __init__(self):
         self.cat = "weapon"
-        self.name = "Spear"
+        self.name = "Long Spear"
         self.statSpeed = 3
         self.statPierce = 5
         self.statDamage = 2
@@ -73,7 +73,7 @@ class Spear:
 class Leather:
     def __init__(self):
         self.cat = "armor"
-        self.name = "Leather Armor"
+        self.name = "Leather Vest"
         self.statProtection = 2
         self.statMagicProtectChance = 3
         self.statWeaponProtectChance = 5
@@ -89,7 +89,7 @@ class Leather:
 class Plate:
     def __init__(self):
         self.cat = "armor"
-        self.name = "Plate Chest Piece"
+        self.name = "Chest Plate"
         self.statProtection = 6
         self.statMagicProtectChance = 1
         self.statWeaponProtectChance = 2
@@ -205,7 +205,6 @@ class NewItem:
                 if i.cat == cat:
                     self.catlist.append(i)
 
-
         self.diff = difflvl * 10
         self.ranlower = math.floor(playlvl/self.diff)
         if(self.ranlower > (len(self.ModSwitcher)-1)):
@@ -216,7 +215,7 @@ class NewItem:
             self.ranupper = (len(self.ModSwitcher)-1)
 
         self.chosenmod = self.ModSwitcher[random.randint(self.ranlower, self.ranupper)]
-        self.newItem = self.GlobalItemList[random.randint(0,len(self.GlobalItemList)-1)]
+        self.newItem = self.catlist[random.randint(0,len(self.catlist)-1)]
 
         self.newItem.applymod(self.chosenmod)
         return 

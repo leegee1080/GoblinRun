@@ -5,7 +5,7 @@ from src.Items import NewItem
 # from src.GoblinClass import Goblin
 # from src.FightClass import Fight
 
-gameversion = 0.5
+gameversion = 0.6
 difflevel = 1
 
 #----------------global vars----------------
@@ -33,7 +33,6 @@ input("You enter a goblin den. (Press Enter)")
 input("Time to clear them out. \nSee how far you can get. (Press Enter)")
 print("\n")
 input("Before entering you check your equipment. (Press Enter)")
-CurrentPlayer.printStatSheet()
 CurrentPlayer.printItemList()
 print("\n")
 
