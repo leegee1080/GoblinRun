@@ -1,6 +1,6 @@
 class Player:
 
-    def __init__(self, level, speed, startingHealth, strength, currentXp, XpToLevel, startingMoney, equipWeapon, itemList):
+    def __init__(self, level, speed, startingHealth, strength, currentXp, XpToLevel, startingMoney, equipWeapon, equipArmor, itemList):
         self.level = level
         self.speed = speed
         self.health = startingHealth
@@ -10,6 +10,7 @@ class Player:
         self.XpToLevel = XpToLevel
         self.money = startingMoney
         self.mainWeapon = equipWeapon
+        self.mainArmor = equipArmor
         self.itemList = itemList
     
     def printStatSheet(self):
@@ -18,9 +19,19 @@ class Player:
         print("----------Speed: " + str(self.speed))
         print("---------Health: {}/{}".format(self.health, self.maxHealth))
         print("-------Strength: " + str(self.strength))
+        print("-----Wielding a {}.".format(self.mainWeapon.name))
+        print("------Wearing a {}.".format(self.mainArmor.name))
         print("{} out of {} experience till next level.".format(self.currentXp, self.XpToLevel))
         print("---------------------------------------\n")
         return
+    
+    def printItemList(self):
+        print("-----Wielding a {}.".format(self.mainWeapon.name))
+        print("------Wearing a {}.".format(self.mainArmor.name))
+        print("----In your Bag:")
+        for i in self.itemList:
+            print("A {}.".format(i.name))
+        print("")
     
     def increaseStrength(self, Amount):
         self.strength = self.strength + Amount
