@@ -12,6 +12,7 @@ class Player:
         self.mainWeapon = equipWeapon
         self.mainArmor = equipArmor
         self.itemList = itemList
+        self.damage = equipWeapon.newItem.statDamage + strength
     
     def printStatSheet(self):
         print("--------------Player Stats-------------")
@@ -57,16 +58,22 @@ class Player:
         healthDif = self.maxHealth - self.health
         if Amount <= healthDif:
             self.health = self.health + Amount
-            # print("Healed: " + str(Amount) + "\n")
         else:
             self.health = self.maxHealth
             print("Full Health!\n")
         return
     
     def DamagePlayer(self, Amount):
-        self.health = self.health - Amount
-        #if self.health <= 0:
-            #print("DEBUG: player dead")
+        self.health = self.health - (Amount/self.mainArmor.newItem.statProtection)
+        return
+
+    def DonArmor(self, item):
+        self.mainArmor = item
+        return
+
+    def EquipWeapon(self, item):
+        self.mainWeapon = item
+        self.damage = item.newItem.statDamage + self.strength
         return
     
     def PayPlayer(self, Amount):
@@ -95,6 +102,7 @@ class Player:
                 print("Try again.")
                 val = input("Type the 3 letter stat you would like to increase: ")
         self.increaseLevel(1)
+        self.damage = self.mainWeapon.newItem.statDamage + self.strength
         self.printStatSheet()
         return
 

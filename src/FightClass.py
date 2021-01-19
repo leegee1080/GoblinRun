@@ -93,8 +93,8 @@ class Fight:
                 print("Target is already dead.")
                 continue
         print("You attack the level {} {} one.\n".format(self.gobList[self.playertargetInt].level, self.gobList[self.playertargetInt].type.name))
-        self.gobList[self.playertargetInt].takedamage(self.currentplayer.strength)
-        print("You do {} damage! The goblin has {} health left.".format(self.currentplayer.strength, self.gobList[self.playertargetInt].health))
+        self.gobList[self.playertargetInt].takedamage(self.currentplayer.damage)
+        print("You do {} damage! The goblin has {} health left.".format(self.currentplayer.damage, self.gobList[self.playertargetInt].health))
         if(self.gobList[self.playertargetInt].health <= 0):
             print("You killed it!\n")
         return
