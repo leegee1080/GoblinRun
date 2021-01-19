@@ -113,6 +113,7 @@ class Fight:
         self.whichgobturn = None
         self.isplayerturn = False
         while(True):
+            print("\nTurn number {} out of {}\n".format(self.turnCounter, self.TurnCounterMax))
             if(self.turnCounter == self.currentplayer.speed or self.isplayerturn == True):
                 self.isplayerturn = True
                 self.whichgobturn = None
