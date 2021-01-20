@@ -29,13 +29,14 @@ class Room:
                         continue
                     if playeranswer <= currentplayer.maxHealth - currentplayer.health:
                         currentplayer.HealPlayer(playeranswer)
+                        currentplayer.money -= playeranswer;
                     else:
                         print("You cannot heal more than your max health.")
             else:
                 break
         return
 
-    def loot(self,currentplayer, difficultylevel):
+    def loot(self,currentplayer, difficultylevel, lootRolls):
         print("loot")
         return
 
@@ -46,8 +47,9 @@ class Room:
     def fight(self, currentplayer, difficultylevel):
         self.newFight = Fight(currentplayer, difficultylevel)
         self.newFight.setupFight()
-        if self.newFight.runFight():
-            self.loot(currentplayer, difficultylevel)
+        self.victoryValue = self.newFight.runFight()
+        if self.victoryValue > 0:
+            self.loot(currentplayer, difficultylevel, self.victoryValue)
         return
 
     def determineroomtype(self, currentplayer, difficultylevel):
