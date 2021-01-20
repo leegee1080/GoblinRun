@@ -130,14 +130,14 @@ class Fight:
                 pass
             if(self.checkPlayerdead()):
                 print("\nThe level {} {} one strikes you with a final blow.".format(self.whichgobturn.level, self.whichgobturn.type.name))
-                break
+                return False
             if(self.checkEnemiesdead()):
                 self.playerExpEarned = 0
                 for gob in self.gobList:
                     self.playerExpEarned += gob.level
                 print("You killed them all!\nYou gained {} experience points!\n".format(self.playerExpEarned))
                 self.currentplayer.IncreaseXP(self.playerExpEarned)
-                break
+                return True
             self.turnCounter -= 1   
             if(self.turnCounter < self.TurnCounterMin):
                 self.turnCounter = self.TurnCounterMax
