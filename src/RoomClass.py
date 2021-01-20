@@ -36,8 +36,13 @@ class Room:
                 break
         return
 
-    def loot(self,currentplayer, difficultylevel, lootRolls):
-        print("loot")
+    def loot(self, currentplayer, difficultylevel, lootRolls):
+        self.lootRollsCounter = lootRolls
+        while self.lootRollsCounter > 0:
+            self.moneygained += random.randint(0, (currentplayer.level/difficultylevel))
+            self.lootRollsCounter -= 1
+        print("You find {} gold coins.\n".format(self.moneygained))
+        currentplayer.money += self.moneygained
         return
 
     def shop(self,currentplayer, difficultylevel):
