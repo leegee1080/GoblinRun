@@ -10,6 +10,7 @@ class Dagger:
         self.statSpeed = 4
         self.statPierce = 3
         self.statDamage = 1
+        self.moneyvalue = 10
         self.statSpecial = "quick"
         #one attack per dagger speed
     def applymod(self, mod):
@@ -18,6 +19,7 @@ class Dagger:
         self.statSpeed *= mod[1]
         self.statPierce *= mod[1]
         self.statDamage *= mod[1]
+        self.moneyvalue *= mod[1]
 
 class Sword:
     def __init__(self):
@@ -26,6 +28,7 @@ class Sword:
         self.statSpeed = 3
         self.statPierce = 3
         self.statDamage = 4
+        self.moneyvalue = 10
         self.statSpecial = "sweep"
         #attack hits all gobs lower level than the gob hit
     def applymod(self, mod):
@@ -34,6 +37,7 @@ class Sword:
         self.statSpeed *= mod[1]
         self.statPierce *= mod[1]
         self.statDamage *= mod[1]
+        self.moneyvalue *= mod[1]
 
 class Axe:
     def __init__(self):
@@ -42,6 +46,7 @@ class Axe:
         self.statSpeed = 2
         self.statPierce = 3
         self.statDamage = 5
+        self.moneyvalue = 10
         self.statSpecial = "heavy"
         #attack hits all gobs higher level than the gob hit
     def applymod(self, mod):
@@ -50,6 +55,7 @@ class Axe:
         self.statSpeed *= mod[1]
         self.statPierce *= mod[1]
         self.statDamage *= mod[1]
+        self.moneyvalue *= mod[1]
 
 class Spear:
     def __init__(self):
@@ -58,6 +64,7 @@ class Spear:
         self.statSpeed = 3
         self.statPierce = 5
         self.statDamage = 2
+        self.moneyvalue = 10
         self.statSpecial = "long"
         #avoid the next number of attacks equal to the pierce stat on this weapon
     def applymod(self, mod):
@@ -66,6 +73,7 @@ class Spear:
         self.statSpeed *= mod[1]
         self.statPierce *= mod[1]
         self.statDamage *= mod[1]
+        self.moneyvalue *= mod[1]
 #Weapons End
 
 
@@ -77,6 +85,7 @@ class Leather:
         self.statProtection = 2
         self.statMagicProtectChance = 3
         self.statWeaponProtectChance = 5
+        self.moneyvalue = 10
         self.statSpecial = "light"
         #x1.3 to player speed
     def applymod(self, mod):
@@ -85,6 +94,7 @@ class Leather:
         self.statProtection *= mod[1]
         self.statMagicProtectChance *= mod[1]
         self.statWeaponProtectChance *= mod[1]
+        self.moneyvalue *= mod[1]
 
 class Plate:
     def __init__(self):
@@ -93,6 +103,7 @@ class Plate:
         self.statProtection = 6
         self.statMagicProtectChance = 1
         self.statWeaponProtectChance = 2
+        self.moneyvalue = 20
         self.statSpecial = "heavy"
         #x0.9 to player speed
     def applymod(self, mod):
@@ -101,6 +112,7 @@ class Plate:
         self.statProtection *= mod[1]
         self.statMagicProtectChance *= mod[1]
         self.statWeaponProtectChance *= mod[1]
+        self.moneyvalue *= mod[1]
 
 class Chain:
     def __init__(self):
@@ -109,6 +121,7 @@ class Chain:
         self.statProtection = 4
         self.statMagicProtectChance = 2
         self.statWeaponProtectChance = 4
+        self.moneyvalue = 15
         self.statSpecial = "medium"
         #x1.1 to player speed
     def applymod(self, mod):
@@ -117,6 +130,7 @@ class Chain:
         self.statProtection *= mod[1]
         self.statMagicProtectChance *= mod[1]
         self.statWeaponProtectChance *= mod[1]
+        self.moneyvalue *= mod[1]
 
 class Cloth:
     def __init__(self):
@@ -125,6 +139,7 @@ class Cloth:
         self.statProtection = 1
         self.statMagicProtectChance = 9
         self.statWeaponProtectChance = 0
+        self.moneyvalue = 5
         self.statSpecial = "loose"
         #immune to gob applied stat effects
     def applymod(self, mod):
@@ -133,6 +148,7 @@ class Cloth:
         self.statProtection *= mod[1]
         self.statMagicProtectChance *= mod[1]
         self.statWeaponProtectChance *= mod[1]
+        self.moneyvalue *= mod[1]
 #Armor End
 
 
@@ -142,33 +158,39 @@ class HealthPot:
         self.cat = "potion"
         self.name = "Health Potion"
         self.Factor = 1
+        self.moneyvalue = 10
         self.statSpecial = "healing"
     def applymod(self, mod):
         self.mod = [mod[0], mod[1]]
         self.name = mod[0] + " " + self.name
         self.Factor *= mod[1]
+        self.moneyvalue *= mod[1]
 
 class DamagePot:
     def __init__(self):
         self.cat = "potion"
         self.name = "Strength Potion"
         self.Factor = 1
+        self.moneyvalue = 10
         self.statSpecial = "damage"
     def applymod(self, mod):
         self.mod = [mod[0], mod[1]]
         self.name = mod[0] + " " + self.name
         self.Factor *= mod[1]
+        self.moneyvalue *= mod[1]
 
 class ImmuPot:
     def __init__(self):
         self.cat = "potion"
         self.name = "Immunity Potion"
         self.Factor = 1
+        self.moneyvalue = 10
         self.statSpecial = "immune"
     def applymod(self, mod):
         self.mod = [mod[0], mod[1]]
         self.name = mod[0] + " " + self.name
         self.Factor *= mod[1]
+        self.moneyvalue *= mod[1]
 #Items End
 
 
@@ -203,6 +225,9 @@ class NewItem:
         if str(cat) != "none":
             for i in self.GlobalItemList:
                 if i.cat == cat:
+                    self.catlist.append(i)
+        else:
+            for i in self.GlobalItemList:
                     self.catlist.append(i)
 
         self.diff = difflvl * 10

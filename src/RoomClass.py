@@ -1,9 +1,9 @@
 import random
 from src.FightClass import Fight
+from src.Items import NewItem
 
 class Room:
     def rest(self, currentplayer, difficultylevel):
-        #maybe spend gold for more health
         self.freehealamount = random.randint(1, currentplayer.maxHealth) / difficultylevel
         input("You find a nice place to rest (Press Enter)")
         input("You are healed {:.0f} health points! (Press Enter) \n".format(self.freehealamount))
@@ -37,12 +37,23 @@ class Room:
         return
 
     def loot(self, currentplayer, difficultylevel, lootRolls):
+        if(lootRolls == None):
+            lootRolls = 1
+        self.moneygained = 0;
         self.lootRollsCounter = lootRolls
+        self.itemlist = []
         while self.lootRollsCounter > 0:
             self.moneygained += random.randint(0, (currentplayer.level/difficultylevel))
+            if(random.randint(0,2) == 1):
+                self.itemlist.append(NewItem(1,difficultylevel,"none"))
             self.lootRollsCounter -= 1
-        print("You find {} gold coins.\n".format(self.moneygained))
+        print("You find {} gold coin{}.\n".format(self.moneygained, "s" if len(self.itemlist) != 1 else ""))
         currentplayer.money += self.moneygained
+        if(len(self.itemlist) >0):
+            print("You also find {} item{}.".format(len(self.itemlist),  "s" if len(self.itemlist) != 1 else ""))
+            for item in self.itemlist:
+                print(item.name)
+        print("\n")
         return
 
     def shop(self,currentplayer, difficultylevel):
