@@ -53,15 +53,14 @@ class Room:
         if(len(self.itemlist) >0):
             print("You also find {} item{}.".format(len(self.itemlist),  "s" if len(self.itemlist) != 1 else ""))
             for item in self.itemlist:
-                print(item.newItem.name)
+                print(item.name)
         print("\n")
         return
 
     def lootroom(self, currentplayer, difficultylevel):
-        if(lootRolls == None):
-            lootRolls = 1
+        print("\n------------------TREASURE ROOM---------------------")
         self.moneygained = 0
-        self.lootRollsCounter = lootRolls
+        self.lootRollsCounter = int(currentplayer.level / difficultylevel)
         self.itemlist = []
         while self.lootRollsCounter > 0:
             self.moneygained += random.randint(0, (currentplayer.level/difficultylevel))
@@ -73,7 +72,7 @@ class Room:
         if(len(self.itemlist) >0):
             print("You also find {} item{}.".format(len(self.itemlist),  "s" if len(self.itemlist) != 1 else ""))
             for item in self.itemlist:
-                print(item.newItem.name)
+                print(item.name)
         print("\n")
         return
 
@@ -90,19 +89,33 @@ class Room:
         return
 
     def determineroomtype(self, currentplayer, difficultylevel):
+        # switch = [
+        #     self.fight,
+        #     self.fight,
+        #     self.fight,
+        #     self.fight,
+        #     self.fight,
+        #     self.fight,
+        #     self.fight,
+        #     self.rest,
+        #     self.rest,
+        #     self.rest,
+        #     self.lootroom,
+        #     self.shop
+        # ]
         switch = [
-            self.fight,
-            self.fight,
-            self.fight,
-            self.fight,
-            self.fight,
-            self.fight,
-            self.fight,
-            self.rest,
-            self.rest,
-            self.rest,
             self.lootroom,
-            self.shop
+            self.lootroom,
+            self.lootroom,
+            self.lootroom,
+            self.lootroom,
+            self.lootroom,
+            self.lootroom,
+            self.lootroom,
+            self.lootroom,
+            self.lootroom,
+            self.lootroom,
+            self.lootroom
         ]
         self.randint = random.randint(0,len(switch)-1)
         self.func = switch[self.randint]

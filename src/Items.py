@@ -1,157 +1,6 @@
 import math
 import random
 
-
-#Weapons
-class Dagger:
-    def __init__(self):
-        self.cat = "weapon"
-        self.name = "Light Dagger"
-        self.statSpeed = 4
-        self.statPierce = 3
-        self.statDamage = 1
-        self.moneyvalue = 10
-        self.statSpecial = "quick"
-        #one attack per dagger speed
-    def applymod(self, mod):
-        self.mod = [mod[0], mod[1]]
-        self.name = mod[0] + " " + self.name
-        self.statSpeed *= mod[1]
-        self.statPierce *= mod[1]
-        self.statDamage *= mod[1]
-        self.moneyvalue *= mod[1]
-
-class Sword:
-    def __init__(self):
-        self.cat = "weapon"
-        self.name = "Two-Handed Sword"
-        self.statSpeed = 3
-        self.statPierce = 3
-        self.statDamage = 4
-        self.moneyvalue = 10
-        self.statSpecial = "sweep"
-        #attack hits all gobs lower level than the gob hit
-    def applymod(self, mod):
-        self.mod = [mod[0], mod[1]]
-        self.name = mod[0] + " " + self.name
-        self.statSpeed *= mod[1]
-        self.statPierce *= mod[1]
-        self.statDamage *= mod[1]
-        self.moneyvalue *= mod[1]
-
-class Axe:
-    def __init__(self):
-        self.cat = "weapon"
-        self.name = "Heavy Axe"
-        self.statSpeed = 2
-        self.statPierce = 3
-        self.statDamage = 5
-        self.moneyvalue = 10
-        self.statSpecial = "heavy"
-        #attack hits all gobs higher level than the gob hit
-    def applymod(self, mod):
-        self.mod = [mod[0], mod[1]]
-        self.name = mod[0] + " " + self.name
-        self.statSpeed *= mod[1]
-        self.statPierce *= mod[1]
-        self.statDamage *= mod[1]
-        self.moneyvalue *= mod[1]
-
-class Spear:
-    def __init__(self):
-        self.cat = "weapon"
-        self.name = "Long Spear"
-        self.statSpeed = 3
-        self.statPierce = 5
-        self.statDamage = 2
-        self.moneyvalue = 10
-        self.statSpecial = "long"
-        #avoid the next number of attacks equal to the pierce stat on this weapon
-    def applymod(self, mod):
-        self.mod = [mod[0], mod[1]]
-        self.name = mod[0] + " " + self.name
-        self.statSpeed *= mod[1]
-        self.statPierce *= mod[1]
-        self.statDamage *= mod[1]
-        self.moneyvalue *= mod[1]
-#Weapons End
-
-
-#Armor
-class Leather:
-    def __init__(self):
-        self.cat = "armor"
-        self.name = "Leather Vest"
-        self.statProtection = 2
-        self.statMagicProtectChance = 3
-        self.statWeaponProtectChance = 5
-        self.moneyvalue = 10
-        self.statSpecial = "light"
-        #x1.3 to player speed
-    def applymod(self, mod):
-        self.mod = [mod[0], mod[1]]
-        self.name = mod[0] + " " + self.name
-        self.statProtection *= mod[1]
-        self.statMagicProtectChance *= mod[1]
-        self.statWeaponProtectChance *= mod[1]
-        self.moneyvalue *= mod[1]
-
-class Plate:
-    def __init__(self):
-        self.cat = "armor"
-        self.name = "Chest Plate"
-        self.statProtection = 6
-        self.statMagicProtectChance = 1
-        self.statWeaponProtectChance = 2
-        self.moneyvalue = 20
-        self.statSpecial = "heavy"
-        #x0.9 to player speed
-    def applymod(self, mod):
-        self.mod = [mod[0], mod[1]]
-        self.name = mod[0] + " " + self.name
-        self.statProtection *= mod[1]
-        self.statMagicProtectChance *= mod[1]
-        self.statWeaponProtectChance *= mod[1]
-        self.moneyvalue *= mod[1]
-
-class Chain:
-    def __init__(self):
-        self.cat = "armor"
-        self.name = "Chain Shirt"
-        self.statProtection = 4
-        self.statMagicProtectChance = 2
-        self.statWeaponProtectChance = 4
-        self.moneyvalue = 15
-        self.statSpecial = "medium"
-        #x1.1 to player speed
-    def applymod(self, mod):
-        self.mod = [mod[0], mod[1]]
-        self.name = mod[0] + " " + self.name
-        self.statProtection *= mod[1]
-        self.statMagicProtectChance *= mod[1]
-        self.statWeaponProtectChance *= mod[1]
-        self.moneyvalue *= mod[1]
-
-class Cloth:
-    def __init__(self):
-        self.cat = "armor"
-        self.name = "Cloth Tunic"
-        self.statProtection = 1
-        self.statMagicProtectChance = 9
-        self.statWeaponProtectChance = 0
-        self.moneyvalue = 5
-        self.statSpecial = "loose"
-        #immune to gob applied stat effects
-    def applymod(self, mod):
-        self.mod = [mod[0], mod[1]]
-        self.name = mod[0] + " " + self.name
-        self.statProtection *= mod[1]
-        self.statMagicProtectChance *= mod[1]
-        self.statWeaponProtectChance *= mod[1]
-        self.moneyvalue *= mod[1]
-#Armor End
-
-
 #Items
 class HealthPot:
     def __init__(self):
@@ -162,7 +11,7 @@ class HealthPot:
         self.statSpecial = "healing"
     def applymod(self, mod):
         self.mod = [mod[0], mod[1]]
-        self.name = mod[0] + " " + self.name
+        self.modName = mod[0] + " " + self.name
         self.Factor *= mod[1]
         self.moneyvalue *= mod[1]
 
@@ -175,7 +24,7 @@ class DamagePot:
         self.statSpecial = "damage"
     def applymod(self, mod):
         self.mod = [mod[0], mod[1]]
-        self.name = mod[0] + " " + self.name
+        self.modName = mod[0] + " " + self.name
         self.Factor *= mod[1]
         self.moneyvalue *= mod[1]
 
@@ -188,11 +37,32 @@ class ImmuPot:
         self.statSpecial = "immune"
     def applymod(self, mod):
         self.mod = [mod[0], mod[1]]
-        self.name = mod[0] + " " + self.name
+        self.modName = mod[0] + " " + self.name
         self.Factor *= mod[1]
         self.moneyvalue *= mod[1]
 #Items End
 
+class ModList:
+    ModSwitcher = [
+    ("Poor", 0.5),
+    ("Normal", 1),
+    ("Expert", 2),
+    ("Masterwork", 4),
+    ("Legendary", 8)
+    ]
+    
+    def __init__(self, playlvl, difflvl):
+        self.chosenmod = None
+        self.diff = difflvl * 10
+        self.ranlower = math.floor(playlvl/self.diff)
+        if(self.ranlower > (len(self.ModSwitcher)-1)):
+            self.ranlower = (len(self.ModSwitcher)-1)
+
+        self.ranupper = round(playlvl/self.diff + self.ranlower)
+        if(self.ranupper > (len(self.ModSwitcher)-1)):
+            self.ranupper = (len(self.ModSwitcher)-1)
+
+        self.chosenmod = self.ModSwitcher[random.randint(self.ranlower, self.ranupper)]
 
 
 class NewItem:
@@ -205,23 +75,26 @@ class NewItem:
     ("Legendary", 8)
     ]
 
+
     GlobalItemList = [
-        Dagger(),
-        Sword(),
-        Spear(),
-        Axe(),
-        Leather(),
-        Plate(),
-        Chain(),
-        Cloth(),
+        # Dagger(),
+        # Sword(),
+        # Spear(),
+        # Axe(),
+        # Leather(),
+        # Plate(),
+        # Chain(),
+        # Cloth(),
         HealthPot(),
         DamagePot(),
         ImmuPot()
         ]
 
+
     def randomGenItem(self, playlvl, difflvl, cat):
         self.catlist = []
-
+        self.newItem = None
+        self.name = ""
         if str(cat) != "none":
             for i in self.GlobalItemList:
                 if i.cat == cat:
@@ -249,5 +122,5 @@ class NewItem:
         self.randomGenItem(currentplayerlevel, difficultylevel, category)
 
         #apply the stats to this object to make them printable
-        self.name = self.newItem.name
+        self.name = self.newItem.modName
         return
