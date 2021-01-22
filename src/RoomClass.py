@@ -29,7 +29,7 @@ class Room:
                         continue
                     if playeranswer <= currentplayer.maxHealth - currentplayer.health:
                         currentplayer.HealPlayer(playeranswer)
-                        currentplayer.money -= playeranswer;
+                        currentplayer.money -= playeranswer
                     else:
                         print("You cannot heal more than your max health.")
             else:
@@ -39,7 +39,7 @@ class Room:
     def loot(self, currentplayer, difficultylevel, lootRolls):
         if(lootRolls == None):
             lootRolls = 1
-        self.moneygained = 0;
+        self.moneygained = 0
         self.lootRollsCounter = lootRolls
         self.itemlist = []
         while self.lootRollsCounter > 0:
@@ -52,7 +52,7 @@ class Room:
         if(len(self.itemlist) >0):
             print("You also find {} item{}.".format(len(self.itemlist),  "s" if len(self.itemlist) != 1 else ""))
             for item in self.itemlist:
-                print(item.name)
+                print(item.newitem.name)
         print("\n")
         return
 
