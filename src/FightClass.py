@@ -94,7 +94,7 @@ class Fight:
                 continue
         print("You attack the level {} {} one.\n".format(self.gobList[self.playertargetInt].level, self.gobList[self.playertargetInt].type.name))
         self.gobList[self.playertargetInt].takedamage(self.currentplayer.damage)
-        print("You do {} damage! The goblin has {} health left.".format(self.currentplayer.damage, self.gobList[self.playertargetInt].health))
+        print("You do {:.0f} damage! The goblin has {} health left.".format(self.currentplayer.damage, "no" if int(self.gobList[self.playertargetInt].health) <= 0 else int(self.gobList[self.playertargetInt].health)))
         if(self.gobList[self.playertargetInt].health <= 0):
             print("You killed it!\n")
         return
@@ -113,24 +113,21 @@ class Fight:
         self.whichgobturn = None
         self.isplayerturn = False
         while(True):
-            print("\nTurn number {} out of {}\n".format(self.turnCounter, self.TurnCounterMax))
-            if(self.turnCounter == self.currentplayer.speed or self.isplayerturn == True):
-                self.isplayerturn = True
-                self.whichgobturn = None
+            print("\nTurn number {} out of {}".format(self.turnCounter, self.TurnCounterMax))
+            print("-----------------------------------------------------------------------------\n")
+
+            #check for turn counter
+            if(self.turnCounter <= self.currentplayer.speed):
                 self.playerTurn()
                 pass
             for gob in self.gobList:
-                if(self.turnCounter == gob.speed):
-                    self.whichgobturn = gob
-                    self.isplayerturn = False
-                    break
-           
-            if(self.whichgobturn is not None):
-                self.gobTurn(self.whichgobturn)
-                pass
-            if(self.checkPlayerdead()):
-                print("\nThe level {} {} one strikes you with a final blow.".format(self.whichgobturn.level, self.whichgobturn.type.name))
-                return 0
+                if(self.turnCounter <= gob.speed):
+                    self.gobTurn(gob)
+                if(self.checkPlayerdead()):
+                    print("\nThe level {} {} one strikes you with a final blow.".format(self.whichgobturn.level, self.whichgobturn.type.name))
+                    return 0
+
+           #check for deaths
             if(self.checkEnemiesdead()):
                 self.playerExpEarned = 0
                 for gob in self.gobList:

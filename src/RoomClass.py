@@ -33,10 +33,11 @@ class Room:
                     else:
                         print("You cannot heal more than your max health.")
             else:
+                print("You decide to move on.\n")
                 break
         return
 
-    def loot(self, currentplayer, difficultylevel, lootRolls):
+    def lootdrops(self, currentplayer, difficultylevel, lootRolls):
         if(lootRolls == None):
             lootRolls = 1
         self.moneygained = 0
@@ -47,12 +48,32 @@ class Room:
             if(random.randint(0,2) == 1):
                 self.itemlist.append(NewItem(1,difficultylevel,"none"))
             self.lootRollsCounter -= 1
-        print("You find {} gold coin{}.\n".format(self.moneygained, "s" if len(self.itemlist) != 1 else ""))
+        print("You find {} gold coin{}.\n".format(self.moneygained, "s" if self.moneygained != 1 else ""))
         currentplayer.money += self.moneygained
         if(len(self.itemlist) >0):
             print("You also find {} item{}.".format(len(self.itemlist),  "s" if len(self.itemlist) != 1 else ""))
             for item in self.itemlist:
-                print(item.newitem.name)
+                print(item.newItem.name)
+        print("\n")
+        return
+
+    def lootroom(self, currentplayer, difficultylevel):
+        if(lootRolls == None):
+            lootRolls = 1
+        self.moneygained = 0
+        self.lootRollsCounter = lootRolls
+        self.itemlist = []
+        while self.lootRollsCounter > 0:
+            self.moneygained += random.randint(0, (currentplayer.level/difficultylevel))
+            if(random.randint(0,2) == 1):
+                self.itemlist.append(NewItem(1,difficultylevel,"none"))
+            self.lootRollsCounter -= 1
+        print("You find {} gold coin{}.\n".format(self.moneygained, "s" if self.moneygained != 1 else ""))
+        currentplayer.money += self.moneygained
+        if(len(self.itemlist) >0):
+            print("You also find {} item{}.".format(len(self.itemlist),  "s" if len(self.itemlist) != 1 else ""))
+            for item in self.itemlist:
+                print(item.newItem.name)
         print("\n")
         return
 
@@ -65,7 +86,7 @@ class Room:
         self.newFight.setupFight()
         self.victoryValue = self.newFight.runFight()
         if self.victoryValue > 0:
-            self.loot(currentplayer, difficultylevel, self.victoryValue)
+            self.lootdrops(currentplayer, difficultylevel, self.victoryValue)
         return
 
     def determineroomtype(self, currentplayer, difficultylevel):
@@ -75,10 +96,12 @@ class Room:
             self.fight,
             self.fight,
             self.fight,
+            self.fight,
+            self.fight,
             self.rest,
             self.rest,
             self.rest,
-            self.loot,
+            self.lootroom,
             self.shop
         ]
         self.randint = random.randint(0,len(switch)-1)
