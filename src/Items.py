@@ -1,47 +1,6 @@
 import math
 import random
 
-#Items
-class HealthPot:
-    def __init__(self):
-        self.cat = "potion"
-        self.name = "Health Potion"
-        self.Factor = 1
-        self.moneyvalue = 10
-        self.statSpecial = "healing"
-    def applymod(self, mod):
-        self.mod = [mod[0], mod[1]]
-        self.modName = mod[0] + " " + self.name
-        self.Factor *= mod[1]
-        self.moneyvalue *= mod[1]
-
-class DamagePot:
-    def __init__(self):
-        self.cat = "potion"
-        self.name = "Strength Potion"
-        self.Factor = 1
-        self.moneyvalue = 10
-        self.statSpecial = "damage"
-    def applymod(self, mod):
-        self.mod = [mod[0], mod[1]]
-        self.modName = mod[0] + " " + self.name
-        self.Factor *= mod[1]
-        self.moneyvalue *= mod[1]
-
-class ImmuPot:
-    def __init__(self):
-        self.cat = "potion"
-        self.name = "Immunity Potion"
-        self.Factor = 1
-        self.moneyvalue = 10
-        self.statSpecial = "immune"
-    def applymod(self, mod):
-        self.mod = [mod[0], mod[1]]
-        self.modName = mod[0] + " " + self.name
-        self.Factor *= mod[1]
-        self.moneyvalue *= mod[1]
-#Items End
-
 class ModList:
     ModSwitcher = [
     ("Poor", 0.5),
@@ -85,9 +44,9 @@ class NewItem:
         # Plate(),
         # Chain(),
         # Cloth(),
-        HealthPot(),
-        DamagePot(),
-        ImmuPot()
+        #HealthPot(),
+        #DamagePot(),
+        #ImmuPot()
         ]
 
 
