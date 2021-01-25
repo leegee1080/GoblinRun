@@ -1,4 +1,3 @@
-from src.GameManager import GlobalVarStorage
 from src.PlayerClass import Player
 from src.RoomClass import Room
 from src.Items import NewItem
