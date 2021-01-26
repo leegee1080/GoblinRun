@@ -1,15 +1,16 @@
 from src.PlayerClass import Player
 from src.RoomClass import Room
-from src.Items import NewItem
-# from src.GoblinClass import Goblin
-# from src.FightClass import Fight
+from src.WeaponsClass import Weapon
+from src.ArmorClass import Armor
+from src.ConsumablesClass import Consumable
 
 gameversion = 0.6
 difflevel = 1
+startingPlayerLevel = 1
 
 #----------------global vars----------------
 #player stat key(level, speed, startingHealth, strength, currentXp, XpToLevel, startingMoney, equipWeapon, equiparmor, itemList)
-CurrentPlayer = Player(1,10,50,5,0,1,0,NewItem(1,difflevel,"weapon"), NewItem(1,difflevel,"armor"),[])
+CurrentPlayer = Player(startingPlayerLevel,10,50,5,0,1,0,Weapon(startingPlayerLevel,difflevel), Armor(startingPlayerLevel,difflevel),[])
 
 def checkfornextroom():
     while(True):

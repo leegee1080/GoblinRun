@@ -1,8 +1,16 @@
 import random
 from src.FightClass import Fight
 from src.Items import NewItem
+from src.WeaponsClass import Weapon
+from src.ArmorClass import Armor
+from src.ConsumablesClass import Consumable
 
 class Room:
+    def genRandomItem(self, playlvl, difflvl):
+        newItemList = [Weapon(playlvl,difflvl), Armor(playlvl,difflvl), Consumable(playlvl,difflvl)]
+        chosenItem = newItemList[random.randint(0,(len(newItemList)-1))]
+        return chosenItem
+
     def rest(self, currentplayer, difficultylevel):
         self.freehealamount = random.randint(1, currentplayer.maxHealth) / difficultylevel
         input("You find a nice place to rest (Press Enter)")
@@ -45,8 +53,9 @@ class Room:
         self.itemlist = []
         while self.lootRollsCounter > 0:
             self.moneygained += random.randint(0, (currentplayer.level/difficultylevel))
-            if(random.randint(0,2) == 1):
-                self.itemlist.append(NewItem(1,difficultylevel,"none"))
+            if(random.randint(0,3) == 1):
+
+                self.itemlist.append(self.genRandomItem(currentplayer.level, difficultylevel))
             self.lootRollsCounter -= 1
         print("You find {} gold coin{}.\n".format(self.moneygained, "s" if self.moneygained != 1 else ""))
         currentplayer.money += self.moneygained
@@ -64,8 +73,8 @@ class Room:
         self.itemlist = []
         while self.lootRollsCounter > 0:
             self.moneygained += random.randint(0, (currentplayer.level/difficultylevel))
-            if(random.randint(0,2) == 1):
-                self.itemlist.append(NewItem(1,difficultylevel,"none"))
+            if(random.randint(0,3) == 1):
+                self.itemlist.append(self.genRandomItem(currentplayer.level, difficultylevel))
             self.lootRollsCounter -= 1
         print("You find {} gold coin{}.\n".format(self.moneygained, "s" if self.moneygained != 1 else ""))
         currentplayer.money += self.moneygained
@@ -89,33 +98,19 @@ class Room:
         return
 
     def determineroomtype(self, currentplayer, difficultylevel):
-        # switch = [
-        #     self.fight,
-        #     self.fight,
-        #     self.fight,
-        #     self.fight,
-        #     self.fight,
-        #     self.fight,
-        #     self.fight,
-        #     self.rest,
-        #     self.rest,
-        #     self.rest,
-        #     self.lootroom,
-        #     self.shop
-        # ]
         switch = [
+            self.fight,
+            self.fight,
+            self.fight,
+            self.fight,
+            self.fight,
+            self.fight,
+            self.fight,
+            self.rest,
+            self.rest,
+            self.rest,
             self.lootroom,
-            self.lootroom,
-            self.lootroom,
-            self.lootroom,
-            self.lootroom,
-            self.lootroom,
-            self.lootroom,
-            self.lootroom,
-            self.lootroom,
-            self.lootroom,
-            self.lootroom,
-            self.lootroom
+            self.shop
         ]
         self.randint = random.randint(0,len(switch)-1)
         self.func = switch[self.randint]

@@ -12,7 +12,7 @@ class Player:
         self.mainWeapon = equipWeapon
         self.mainArmor = equipArmor
         self.itemList = itemList
-        self.damage = equipWeapon.newItem.statDamage + strength
+        self.damage = equipWeapon.statDamage + strength
     
     def printStatSheet(self):
         print("--------------Player Stats-------------")
@@ -65,7 +65,7 @@ class Player:
         return
     
     def DamagePlayer(self, Amount):
-        self.health = self.health - (Amount/self.mainArmor.newItem.statProtection)
+        self.health = self.health - (Amount/self.mainArmor.statProtection)
         return
 
     def DonArmor(self, item):
@@ -103,7 +103,7 @@ class Player:
                 print("Try again.")
                 val = input("Type the 3 letter stat you would like to increase: ")
         self.increaseLevel(1)
-        self.damage = self.mainWeapon.newItem.statDamage + self.strength
+        self.damage = self.mainWeapon.statDamage + self.strength
         self.printStatSheet()
         return
 
