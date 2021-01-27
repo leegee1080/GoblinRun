@@ -67,5 +67,5 @@ class GlobalGoblinVars:
     GoblinBaseHealth = 0
     GoblinBaseDamage = 0
     GlobalGoblinTypesList = [Slimy(), Tough(), Dumb(), Normal(), Slow(), Fast()]
-    #GlobalGoblinTypesDict = {"Slimy": Slimy(), "Tough": Tough(), "Dumb": Dumb(), "Normal": Normal(), "Slow": Slow(), "Fast": Fast()}
-    #GlobalGoblinBaseStatsList = {"Spe": GoblinBaseSpeed, "Arm": GoblinBaseArmor, "Hea": GoblinBaseHealth, "Dam": GoblinBaseDamage}
+    GlobalGoblinTypesDict = {"Slimy": Slimy(), "Tough": Tough(), "Dumb": Dumb(), "Normal": Normal(), "Slow": Slow(), "Fast": Fast()}
+    GlobalGoblinBaseStatsList = {"Spe": GoblinBaseSpeed, "Arm": GoblinBaseArmor, "Hea": GoblinBaseHealth, "Dam": GoblinBaseDamage}

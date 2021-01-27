@@ -1,6 +1,5 @@
 import random
 from src.FightClass import Fight
-from src.Items import NewItem
 from src.WeaponsClass import Weapon
 from src.ArmorClass import Armor
 from src.ConsumablesClass import Consumable
