@@ -74,9 +74,16 @@ class Player:
 
     def EquipWeapon(self, item):
         self.mainWeapon = item
-        self.damage = item.newItem.statDamage + self.strength
+        self.damage = item.statDamage + self.strength
         return
-    
+
+    def PickUpConsumable(self, item):
+        self.templist = self.itemList
+        self.templist.append(item)
+        self.itemList = self.templist
+        self.templist = None
+        return
+
     def PayPlayer(self, Amount):
         self.money = self.money + Amount
         print("--------You got {} gold coins!---------".format(Amount))

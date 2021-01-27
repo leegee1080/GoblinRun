@@ -53,7 +53,6 @@ class Room:
         while self.lootRollsCounter > 0:
             self.moneygained += random.randint(0, (currentplayer.level/difficultylevel))
             if(random.randint(0,3) == 1):
-
                 self.itemlist.append(self.genRandomItem(currentplayer.level, difficultylevel))
             self.lootRollsCounter -= 1
         print("You find {} gold coin{}.\n".format(self.moneygained, "s" if self.moneygained != 1 else ""))
@@ -61,7 +60,44 @@ class Room:
         if(len(self.itemlist) >0):
             print("You also find {} item{}.".format(len(self.itemlist),  "s" if len(self.itemlist) != 1 else ""))
             for item in self.itemlist:
-                print(item.name)
+                if(item != None):
+                    print(item.name)
+            while(True):
+                self.playerinputstring = input("Which item would you like to take? (type a number from '1' to '{}') (Type 'bag' to see your stats or 'q' to leave)".format(len(self.itemlist)))
+                if(self.playerinputstring == "q" or self.playerinputstring == "Q" or self.playerinputstring == "quit" or self.playerinputstring == "Quit" or self.playerinputstring == "QUIT"):
+                    print("You continue on.\n")
+                    break;
+                if(self.playerinputstring == "bag" or self.playerinputstring == "Bag" or self.playerinputstring == "BAG"):
+                    self.currentplayer.printItemList()
+                    continue
+                try:
+                    self.playertargetInt = int(self.playerinputstring) -1
+                    pass
+                except ValueError:
+                    print("Invalid Command! (Needs to be a number or 'bag')")
+                    continue
+                try:
+                    self.chosenitem = self.itemlist[self.playertargetInt]
+                    if(self.chosenitem.cat == "w"):
+                        self.tempWep = self.currentplayer.mainWeapon
+                        self.currentplayer.EquipWeapon(self.chosenitem)
+                        self.itemlist[self.playertargetInt] = self.tempWep
+                        print("You equip up the {} and drop the {}.".format(self.chosenitem.name ,self.tempWep.name))
+                    if(self.chosenitem.cat == "a"):
+                        self.tempArm = self.currentplayer.mainArmor
+                        self.currentplayer.DonArmor(self.chosenitem)
+                        self.itemlist[self.playertargetInt] = self.tempArm
+                        print("You don the {} and doff the {}.".format(self.chosenitem.name ,self.tempArm.name))
+                    if(self.chosenitem.cat == "c"):
+                        self.currentplayer.PickUpConsumable(self.chosenitem)
+                        self.itemlist.remove(self.playertargetInt)
+                        print("You place the {} in your bag.".format(self.chosenitem.name))
+                    pass
+                except IndexError:
+                    print("Invalid Item!")
+                    continue
+                if(len(self.itemlist) <= 0):
+                    break
         print("\n")
         return
 
@@ -81,6 +117,42 @@ class Room:
             print("You also find {} item{}.".format(len(self.itemlist),  "s" if len(self.itemlist) != 1 else ""))
             for item in self.itemlist:
                 print(item.name)
+            while(True):
+                self.playerinputstring = input("Which item would you like to take? (type a number from '1' to '{}') (Type 'bag' to see your stats or 'q' to leave)".format(len(self.itemlist)))
+                if(self.playerinputstring == "q" or self.playerinputstring == "Q" or self.playerinputstring == "quit" or self.playerinputstring == "Quit" or self.playerinputstring == "QUIT"):
+                    print("You continue on.\n")
+                    break;
+                if(self.playerinputstring == "bag" or self.playerinputstring == "Bag" or self.playerinputstring == "BAG"):
+                    self.currentplayer.printItemList()
+                    continue
+                try:
+                    self.playertargetInt = int(self.playerinputstring) -1
+                    pass
+                except ValueError:
+                    print("Invalid Command! (Needs to be a number or 'bag')")
+                    continue
+                try:
+                    self.chosenitem = self.itemlist[self.playertargetInt]
+                    if(self.chosenitem.cat == "w"):
+                        self.tempWep = self.currentplayer.mainWeapon
+                        self.currentplayer.EquipWeapon(self.chosenitem)
+                        self.itemlist[self.playertargetInt] = self.tempWep
+                        print("You equip up the {} and drop the {}.".format(self.chosenitem.name ,self.tempWep.name))
+                    if(self.chosenitem.cat == "a"):
+                        self.tempArm = self.currentplayer.mainArmor
+                        self.currentplayer.DonArmor(self.chosenitem)
+                        self.itemlist[self.playertargetInt] = self.tempArm
+                        print("You don the {} and doff the {}.".format(self.chosenitem.name ,self.tempArm.name))
+                    if(self.chosenitem.cat == "c"):
+                        self.currentplayer.PickUpConsumable(self.chosenitem)
+                        self.itemlist.remove(self.playertargetInt)
+                        print("You place the {} in your bag.".format(self.chosenitem.name))
+                    pass
+                except IndexError:
+                    print("Invalid Item!")
+                    continue
+                if(len(self.itemlist) <= 0):
+                    break
         print("\n")
         return
 
