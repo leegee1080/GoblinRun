@@ -4,6 +4,7 @@ from src.Items import ModList
 
 class Consumable:
     def __init__(self, playlvl, difflvl):
+        self.cat = "c"
         self.type = ConsumablesGlobalVars.GlobalConsumableTypesList[random.randint(0, len(ConsumablesGlobalVars.GlobalConsumableTypesList)-1)]
         self.chosenmod = ModList(playlvl, difflvl)
         self.mod = [self.chosenmod.newchosenmod[0], self.chosenmod.newchosenmod[1]]

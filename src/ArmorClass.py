@@ -4,6 +4,7 @@ from src.Items import ModList
 
 class Armor:
     def __init__(self, playlvl, difflvl):
+        self.cat = "a"
         self.type = ArmorGlobalVars.GlobalArmorTypesList[random.randint(0, len(ArmorGlobalVars.GlobalArmorTypesList)-1)]
         self.chosenmod = ModList(playlvl, difflvl)
         self.mod = [self.chosenmod.newchosenmod[0], self.chosenmod.newchosenmod[1]]
