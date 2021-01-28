@@ -9,8 +9,8 @@ difflevel = 1
 startingPlayerLevel = 1
 
 #----------------global vars----------------
-#player stat key(level, speed, startingHealth, strength, currentXp, XpToLevel, startingMoney, equipWeapon, equiparmor, itemList)
-CurrentPlayer = Player(startingPlayerLevel,10,50,5,0,1,0,Weapon(startingPlayerLevel,difflevel), Armor(startingPlayerLevel,difflevel),[])
+#player stat key(level, agility, startingHealth, strength, currentXp, XpToLevel, startingMoney, equipWeapon, equiparmor, itemList)
+CurrentPlayer = Player(startingPlayerLevel,10,50,5,0,1,0,None,None,[])
 
 def checkfornextroom():
     while(True):

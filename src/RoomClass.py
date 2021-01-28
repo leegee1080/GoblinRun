@@ -59,14 +59,16 @@ class Room:
         currentplayer.money += self.moneygained
         if(len(self.itemlist) >0):
             print("You also find {} item{}.".format(len(self.itemlist),  "s" if len(self.itemlist) != 1 else ""))
+            self.itemIndex = 1
             for item in self.itemlist:
                 if(item != None):
-                    print(item.name)
+                    print("{}--> {}".format(self.itemIndex, item.name))
+                    self.itemIndex += 1
             while(True):
-                self.playerinputstring = input("Which item would you like to take? (type a number from '1' to '{}') (Type 'bag' to see your stats or 'q' to leave)".format(len(self.itemlist)))
+                self.playerinputstring = input("Which item would you like to take? (Type a number from '1' to '{}') (Type 'bag' to see your stats or 'q' to leave)".format(len(self.itemlist)))
                 if(self.playerinputstring == "q" or self.playerinputstring == "Q" or self.playerinputstring == "quit" or self.playerinputstring == "Quit" or self.playerinputstring == "QUIT"):
                     print("You continue on.\n")
-                    break;
+                    break
                 if(self.playerinputstring == "bag" or self.playerinputstring == "Bag" or self.playerinputstring == "BAG"):
                     self.currentplayer.printItemList()
                     continue
@@ -117,11 +119,12 @@ class Room:
             print("You also find {} item{}.".format(len(self.itemlist),  "s" if len(self.itemlist) != 1 else ""))
             for item in self.itemlist:
                 print(item.name)
+            print("\n")
             while(True):
                 self.playerinputstring = input("Which item would you like to take? (type a number from '1' to '{}') (Type 'bag' to see your stats or 'q' to leave)".format(len(self.itemlist)))
                 if(self.playerinputstring == "q" or self.playerinputstring == "Q" or self.playerinputstring == "quit" or self.playerinputstring == "Quit" or self.playerinputstring == "QUIT"):
                     print("You continue on.\n")
-                    break;
+                    break
                 if(self.playerinputstring == "bag" or self.playerinputstring == "Bag" or self.playerinputstring == "BAG"):
                     self.currentplayer.printItemList()
                     continue
@@ -133,20 +136,24 @@ class Room:
                     continue
                 try:
                     self.chosenitem = self.itemlist[self.playertargetInt]
+                    print("!DEBUG found item: " + self.chosenitem.name)
                     if(self.chosenitem.cat == "w"):
+                        print("!DEBUG found weapon: " + self.chosenitem.name)
                         self.tempWep = self.currentplayer.mainWeapon
+                        print(self.tempWep)
                         self.currentplayer.EquipWeapon(self.chosenitem)
                         self.itemlist[self.playertargetInt] = self.tempWep
-                        print("You equip up the {} and drop the {}.".format(self.chosenitem.name ,self.tempWep.name))
+                        print(self.itemlist[self.playertargetInt].name)
+                        print("You equip up the {} and drop the {}.".format(self.chosenitem.name, self.tempWep.name))
                     if(self.chosenitem.cat == "a"):
                         self.tempArm = self.currentplayer.mainArmor
                         self.currentplayer.DonArmor(self.chosenitem)
                         self.itemlist[self.playertargetInt] = self.tempArm
-                        print("You don the {} and doff the {}.".format(self.chosenitem.name ,self.tempArm.name))
+                        print("You don the {} and doff the {}.".format(self.chosenitem.name, self.tempArm.name))
                     if(self.chosenitem.cat == "c"):
                         self.currentplayer.PickUpConsumable(self.chosenitem)
-                        self.itemlist.remove(self.playertargetInt)
                         print("You place the {} in your bag.".format(self.chosenitem.name))
+                        self.itemlist.remove(self.playertargetInt)
                     pass
                 except IndexError:
                     print("Invalid Item!")
@@ -169,19 +176,22 @@ class Room:
         return
 
     def determineroomtype(self, currentplayer, difficultylevel):
+        # switch = [
+        #     self.fight,
+        #     self.fight,
+        #     self.fight,
+        #     self.fight,
+        #     self.fight,
+        #     self.fight,
+        #     self.fight,
+        #     self.rest,
+        #     self.rest,
+        #     self.rest,
+        #     self.lootroom,
+        #     self.shop
+        # ]
         switch = [
-            self.fight,
-            self.fight,
-            self.fight,
-            self.fight,
-            self.fight,
-            self.fight,
-            self.fight,
-            self.rest,
-            self.rest,
-            self.rest,
             self.lootroom,
-            self.shop
         ]
         self.randint = random.randint(0,len(switch)-1)
         self.func = switch[self.randint]

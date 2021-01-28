@@ -1,8 +1,8 @@
 class Player:
 
-    def __init__(self, level, speed, startingHealth, strength, currentXp, XpToLevel, startingMoney, equipWeapon, equipArmor, itemList):
+    def __init__(self, level, agl, startingHealth, strength, currentXp, XpToLevel, startingMoney, equipWeapon, equipArmor, itemList):
         self.level = level
-        self.speed = speed
+        self.agl = agl
         self.health = startingHealth
         self.maxHealth = startingHealth
         self.strength = strength
@@ -12,23 +12,34 @@ class Player:
         self.mainWeapon = equipWeapon
         self.mainArmor = equipArmor
         self.itemList = itemList
-        self.damage = equipWeapon.statDamage + strength
+        self.speed = agl
+        self.damage = strength
+        self.isImmune = False
+        if (self.mainWeapon != None):
+            self.EquipWeapon(equipWeapon)
+        if (self.mainArmor != None):
+            self.DonArmor(equipArmor)
+
     
     def printStatSheet(self):
         print("--------------Player Stats-------------")
         print("----------Level: " + str(self.level))
-        print("----------Speed: " + str(self.speed))
-        print("---------Health: {}/{}".format(self.health, self.maxHealth))
+        print("----------Speed: " + str(int(self.speed)))
+        print("---------Health: {}/{}".format(int(self.health), int(self.maxHealth)))
         print("-------Strength: " + str(self.strength))
-        print("-----Wielding a {}.".format(self.mainWeapon.name))
-        print("------Wearing a {}.".format(self.mainArmor.name))
+        if (self.mainWeapon != None):
+            print("-----Wielding a {}.".format(self.mainWeapon.name))
+        if (self.mainArmor != None):
+            print("------Wearing a {}.".format(self.mainArmor.name))
         print("{} out of {} experience till next level.".format(self.currentXp, self.XpToLevel))
         print("---------------------------------------\n")
         return
     
     def printItemList(self):
-        print("-----Wielding a {}.".format(self.mainWeapon.name))
-        print("------Wearing a {}.".format(self.mainArmor.name))
+        if (self.mainWeapon != None):
+            print("-----Wielding a {}.".format(self.mainWeapon.name))
+        if (self.mainArmor != None):
+            print("------Wearing a {}.".format(self.mainArmor.name))
         print("------A purse with {} gold coin{}.".format("a" if self.money == 1 else self.money, "s" if self.money != 1 else ""))
         print("In your Bag:")
         for i in self.itemList:
@@ -40,9 +51,9 @@ class Player:
         print("----------Strength went up!------------")
         return
     
-    def increaseSpeed(self, Amount):
-        self.speed = self.speed + Amount
-        print("----------Speed went up!---------------")
+    def increaseAgl(self, Amount):
+        self.agl = self.agl + Amount
+        print("----------Agility went up!---------------")
         return
 
     def increaseHealth(self, Amount):
@@ -65,7 +76,10 @@ class Player:
         return
     
     def DamagePlayer(self, Amount):
-        self.health = self.health - (Amount/self.mainArmor.statProtection)
+        if(self.mainArmor != None):
+            self.health = self.health - (Amount/self.mainArmor.statProtection)
+        else:
+            self.health -= Amount
         return
 
     def DonArmor(self, item):
@@ -78,6 +92,7 @@ class Player:
         return
 
     def PickUpConsumable(self, item):
+        print("!DEBUG picked up item: " + self.item.name)
         self.templist = self.itemList
         self.templist.append(item)
         self.itemList = self.templist
@@ -91,14 +106,14 @@ class Player:
 
     def LevelUp(self):
         input("----------You have leveled up!---------- (Press Enter)")
-        print("-----> Type 'Spd' For Speed")
+        print("-----> Type 'Agl' For Agility")
         print("-----> Type 'Hth' For Max Health")
         print("-----> Type 'Str' For Strength")
         val = input("Type the 3 letter stat you would like to increase: ")
         print("---------------------------------------")
         while True:
-            if val == "Spd" or val == "spd":
-                self.increaseSpeed(5)
+            if val == "Agl" or val == "agl":
+                self.increaseAgl(5)
                 break
             if val == "Hth" or val == "hth":
                 self.increaseHealth(10)
@@ -110,7 +125,22 @@ class Player:
                 print("Try again.")
                 val = input("Type the 3 letter stat you would like to increase: ")
         self.increaseLevel(1)
-        self.damage = self.mainWeapon.statDamage + self.strength
+        if(self.mainWeapon != None):
+            self.damage = self.mainWeapon.statDamage + self.strength
+        else:
+            self.damage = self.strength
+
+        if(self.mainArmor != None):
+            if(self.mainArmor.statSpecial(0) != "loose"):
+                self.speed = self.mainArmor.statSpecial(1) * self.agl
+                self.isImmune = False
+            else:
+                self.speed = self.agl
+                self.isImmune = True
+        else:
+            self.speed = self.agl
+            self.isImmune = False
+
         self.printStatSheet()
         return
 

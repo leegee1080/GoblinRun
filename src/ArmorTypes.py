@@ -5,7 +5,7 @@ class Leather:
         self.statMagicProtectChance = 3
         self.statWeaponProtectChance = 5
         self.moneyvalue = 10
-        self.statSpecial = "light"
+        self.statSpecial = ("light", 1.4)
         #x1.3 to player speed
 
 class Plate:
@@ -15,7 +15,7 @@ class Plate:
         self.statMagicProtectChance = 1
         self.statWeaponProtectChance = 2
         self.moneyvalue = 20
-        self.statSpecial = "heavy"
+        self.statSpecial = ("heavy", 0.9)
         #x0.9 to player speed
 
 class Chain:
@@ -25,7 +25,7 @@ class Chain:
         self.statMagicProtectChance = 2
         self.statWeaponProtectChance = 4
         self.moneyvalue = 15
-        self.statSpecial = "medium"
+        self.statSpecial = ("medium", 1.1)
         #x1.1 to player speed
 
 class Cloth:
@@ -35,7 +35,7 @@ class Cloth:
         self.statMagicProtectChance = 9
         self.statWeaponProtectChance = 0
         self.moneyvalue = 5
-        self.statSpecial = "loose"
+        self.statSpecial = ("loose", 1)
         #immune to gob applied stat effects
 
 #Global Vars including Typelist
