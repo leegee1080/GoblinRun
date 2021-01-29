@@ -84,15 +84,39 @@ class Player:
 
     def DonArmor(self, item):
         self.mainArmor = item
+        if(self.mainArmor != None):
+            if(self.mainArmor.statSpecial[0] != "loose"):
+                self.speed = self.mainArmor.statSpecial[1] * self.agl
+                self.isImmune = False
+            else:
+                self.speed = self.agl
+                self.isImmune = True
+        else:
+            self.speed = self.agl
+            self.isImmune = False
+        return
+    
+    def DoffArmor(self):
+        if(self.mainArmor != None):
+            print("You remove your {}.".format(self.mainArmor.name))
+            self.mainArmor = None
+            self.DonArmor(None)
         return
 
     def EquipWeapon(self, item):
-        self.mainWeapon = item
-        self.damage = item.statDamage + self.strength
+        if(item != None):
+            self.mainWeapon = item
+            self.damage = item.statDamage + self.strength
+        return
+    
+    def DiscardWeapon(self):
+        if(self.mainWeapon != None):
+            self.mainWeapon = None
+            self.damage = self.strength
         return
 
+
     def PickUpConsumable(self, item):
-        print("!DEBUG picked up item: " + self.item.name)
         self.templist = self.itemList
         self.templist.append(item)
         self.itemList = self.templist
@@ -125,14 +149,16 @@ class Player:
                 print("Try again.")
                 val = input("Type the 3 letter stat you would like to increase: ")
         self.increaseLevel(1)
+
+        #update armor and wep stats
         if(self.mainWeapon != None):
             self.damage = self.mainWeapon.statDamage + self.strength
         else:
             self.damage = self.strength
 
         if(self.mainArmor != None):
-            if(self.mainArmor.statSpecial(0) != "loose"):
-                self.speed = self.mainArmor.statSpecial(1) * self.agl
+            if(self.mainArmor.statSpecial[0] != "loose"):
+                self.speed = self.mainArmor.statSpecial[1] * self.agl
                 self.isImmune = False
             else:
                 self.speed = self.agl
@@ -141,6 +167,7 @@ class Player:
             self.speed = self.agl
             self.isImmune = False
 
+        #print the stat sheet
         self.printStatSheet()
         return
 

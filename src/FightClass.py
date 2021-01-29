@@ -110,10 +110,9 @@ class Fight:
 
     def runFight(self):
         self.turnCounter = self.TurnCounterMax
-        self.whichgobturn = None
         self.isplayerturn = False
         while(True):
-            print("\nTurn number {} out of {}".format(self.turnCounter, self.TurnCounterMax))
+            print("\nTurn number {:.0f} out of {:.0f}".format(self.turnCounter, self.TurnCounterMax))
             print("-----------------------------------------------------------------------------\n")
 
             #check for turn counter
@@ -124,7 +123,7 @@ class Fight:
                 if(self.turnCounter <= gob.speed):
                     self.gobTurn(gob)
                 if(self.checkPlayerdead()):
-                    print("\nThe level {} {} one strikes you with a final blow.".format(self.whichgobturn.level, self.whichgobturn.type.name))
+                    print("\nThe level {} {} one strikes you with a final blow.".format(gob.level, gob.type.name))
                     return 0
 
            #check for deaths

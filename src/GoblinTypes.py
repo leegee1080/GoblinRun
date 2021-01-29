@@ -62,9 +62,9 @@ class Normal:
 
 #Global Vars including Typelist
 class GlobalGoblinVars:
-    GoblinBaseSpeed = 1
+    GoblinBaseSpeed = 5
     GoblinBaseArmor = 0
-    GoblinBaseHealth = 0
+    GoblinBaseHealth = 5
     GoblinBaseDamage = 0
     GlobalGoblinTypesList = [Slimy(), Tough(), Dumb(), Normal(), Slow(), Fast()]
     GlobalGoblinTypesDict = {"Slimy": Slimy(), "Tough": Tough(), "Dumb": Dumb(), "Normal": Normal(), "Slow": Slow(), "Fast": Fast()}
