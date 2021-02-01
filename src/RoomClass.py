@@ -34,7 +34,7 @@ class Room:
                     except ValueError:
                         print("Invalid Command! (Needs to be a number.)")
                         continue
-                    if playeranswer <= currentplayer.maxHealth - currentplayer.health:
+                    if currentplayer.maxHealth >= playeranswer - currentplayer.health and playeranswer <= currentplayer.money:
                         currentplayer.HealPlayer(playeranswer)
                         currentplayer.money -= playeranswer
                     else:

@@ -70,6 +70,7 @@ class Player:
         healthDif = self.maxHealth - self.health
         if Amount <= healthDif:
             self.health = self.health + Amount
+            print("Healed " + str(int(Amount)) + " health.")
         else:
             self.health = self.maxHealth
             print("Full Health!\n")
