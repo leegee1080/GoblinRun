@@ -1,6 +1,6 @@
 class Player:
 
-    def __init__(self, level, agl, startingHealth, strength, currentXp, XpToLevel, startingMoney, equipWeapon, equipArmor, itemList):
+    def __init__(self, level, agl, startingHealth, strength, currentXp, XpToLevel, startingMoney, equipWeapon, equipArmor, itemList, gobRep):
         self.level = level
         self.agl = agl
         self.health = startingHealth
@@ -14,6 +14,7 @@ class Player:
         self.itemList = itemList
         self.speed = agl
         self.damage = strength
+        self.goblinRep = gobRep
         self.isImmune = False
         if (self.mainWeapon != None):
             self.EquipWeapon(equipWeapon)
@@ -40,7 +41,7 @@ class Player:
             print("-----Wielding a {}.".format(self.mainWeapon.name))
         if (self.mainArmor != None):
             print("------Wearing a {}.".format(self.mainArmor.name))
-        print("------A purse with {} gold coin{}.".format("a" if self.money == 1 else self.money, "s" if self.money != 1 else ""))
+        print("------A purse with {} gold coin{}.".format("a" if int(self.money) == 1 else int(self.money), "s" if int(self.money) != 1 else ""))
         print("In your Bag:")
         for i in self.itemList:
             print("A {}.".format(i.name))
@@ -116,7 +117,6 @@ class Player:
             self.damage = self.strength
         return
 
-
     def PickUpConsumable(self, item):
         self.templist = self.itemList
         self.templist.append(item)
@@ -124,10 +124,18 @@ class Player:
         self.templist = None
         return
 
+    def DropItem(self, newItemList):
+        self.itemList = newItemList
+        return
+
     def PayPlayer(self, Amount):
         self.money = self.money + Amount
-        print("--------You got {} gold coins!---------".format(Amount))
+        print("--------You got {} gold coins.---------".format(int(Amount)))
         return
+
+    def ChargePlayer(self, Amount):
+        self.money -= Amount
+        print("-------You lose {} gold coins.---------".format(int(Amount)))
 
     def LevelUp(self):
         input("----------You have leveled up!---------- (Press Enter)")
