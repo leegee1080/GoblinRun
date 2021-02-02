@@ -12,10 +12,10 @@ class Goblin:
     def __init__(self, level):
         self.type = GlobalGoblinVars.GlobalGoblinTypesList[random.randint(0, len(GlobalGoblinVars.GlobalGoblinTypesList)-1)]
         self.level = level
-        self.speed = GlobalGoblinVars.GlobalGoblinBaseStatsList["Spe"] + self.type.statSpeed + level
-        self.health = GlobalGoblinVars.GlobalGoblinBaseStatsList["Hea"] + self.type.statSpeed + level
-        self.armor = GlobalGoblinVars.GlobalGoblinBaseStatsList["Arm"] + self.type.statSpeed + level
-        self.damage = GlobalGoblinVars.GlobalGoblinBaseStatsList["Dam"] + self.type.statSpeed + level
+        self.speed = GlobalGoblinVars.GlobalGoblinBaseStatsList["Spe"] + self.type.statSpeed * (level/2)
+        self.health = GlobalGoblinVars.GlobalGoblinBaseStatsList["Hea"] + self.type.statHealth * (level/2)
+        self.armor = GlobalGoblinVars.GlobalGoblinBaseStatsList["Arm"] + self.type.statArmor
+        self.damage = GlobalGoblinVars.GlobalGoblinBaseStatsList["Dam"] + self.type.statDamage * (level/2)
         self.effect = self.type.appliedEffect
         self.alive = True
 
@@ -31,6 +31,9 @@ class Goblin:
         return
 
     def takedamage(self, amount):
-        self.health -= amount
+        self.tempDam = (amount*self.armor)
+        print("The goblin takes {}.".format(int(self.tempDam)))
+        self.health -= self.tempDam
         if (self.health <= 0):
+            print("You killed it!\n")
             self.alive = False

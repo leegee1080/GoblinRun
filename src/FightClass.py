@@ -92,11 +92,9 @@ class Fight:
             else:
                 print("Target is already dead.")
                 continue
-        print("You attack the level {} {} one.\n".format(self.gobList[self.playertargetInt].level, self.gobList[self.playertargetInt].type.name))
+        print("You attack the level {} {} one.".format(self.gobList[self.playertargetInt].level, self.gobList[self.playertargetInt].type.name))
+        print("You strike {:.0f} potential damage!.\n".format(self.currentplayer.damage))
         self.gobList[self.playertargetInt].takedamage(self.currentplayer.damage)
-        print("You do {:.0f} damage! The goblin has {} health left.".format(self.currentplayer.damage, "no" if int(self.gobList[self.playertargetInt].health) <= 0 else int(self.gobList[self.playertargetInt].health)))
-        if(self.gobList[self.playertargetInt].health <= 0):
-            print("You killed it!\n")
         return
 
     def gobTurn(self, gobParam):
@@ -104,8 +102,8 @@ class Fight:
             return
         else:
             print("\n~~~Level {} {} one attacks!~~~".format(gobParam.level, gobParam.type.name))
-            print("The goblin hits you for {}\n".format(gobParam.damage))
-            self.currentplayer.DamagePlayer(gobParam.damage)
+            print("The goblin tries to hit you for {}\n".format(int(gobParam.damage)))
+            self.currentplayer.DamagePlayer(int(gobParam.damage))
             return
 
     def runFight(self):

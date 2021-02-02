@@ -3,11 +3,11 @@ import random
 
 class ModList:
     ModSwitcher = [
-    ("Poor", 0.5),
-    ("Normal", 1),
-    ("Expert", 2),
+    ("Poor", 1),
+    ("Normal", 2),
+    ("Expert", 3),
     ("Masterwork", 4),
-    ("Legendary", 8)
+    ("Legendary", 5)
     ]
     
     def __init__(self, playlvl, difflvl):

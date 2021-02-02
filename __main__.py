@@ -77,7 +77,7 @@ def checkfornextroom():
         if(playeranswer == "stat" or playeranswer == "Stat" or playeranswer == "STAT"):
             CurrentPlayer.printStatSheet()
             continue
-        if(playeranswer == "y" or playeranswer == "Y" or playeranswer == ""):
+        if(playeranswer == "y" or playeranswer == "Y" or playeranswer == "" or playeranswer == "" or playeranswer == "\\"):
             return True
         else:
             return False

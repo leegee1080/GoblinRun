@@ -1,5 +1,6 @@
-class Player:
+import random
 
+class Player:
     def __init__(self, level, agl, startingHealth, strength, currentXp, XpToLevel, startingMoney, equipWeapon, equipArmor, itemList, gobRep):
         self.level = level
         self.agl = agl
@@ -79,8 +80,16 @@ class Player:
     
     def DamagePlayer(self, Amount):
         if(self.mainArmor != None):
-            self.health = self.health - (Amount/self.mainArmor.statProtection)
+            if(random.randint(1, 100) >= self.mainArmor.statWeaponProtectChance):
+                self.tempDam = (Amount*self.mainArmor.statProtection)
+                print("The goblin hits your armor but still does {} damage!".format(int(self.tempDam)))
+                self.health = self.health - self.tempDam
+                return
+            else:
+                print("You dodge the goblin's attack!")
+                return
         else:
+            print("The goblin hits you for full damage!")
             self.health -= Amount
         return
 
@@ -90,9 +99,11 @@ class Player:
             if(self.mainArmor.statSpecial[0] != "loose"):
                 self.speed = self.mainArmor.statSpecial[1] * self.agl
                 self.isImmune = False
+                return
             else:
                 self.speed = self.agl
                 self.isImmune = True
+                return
         else:
             self.speed = self.agl
             self.isImmune = False
