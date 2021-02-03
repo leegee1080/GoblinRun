@@ -102,7 +102,11 @@ class Fight:
             return
         else:
             print("\n~~~Level {} {} one attacks!~~~".format(gobParam.level, gobParam.type.name))
-            print("The goblin tries to hit you for {}\n".format(int(gobParam.damage)))
+            if(gobParam.effect != None):
+                print("The goblin tries a {} spell for {} damage.\n".format(gobParam.effect[0], int(gobParam.damage)))
+                self.currentplayer.SmitePlayer(gobParam.effect)
+            else:
+                print("The goblin tries to hit you for {}\n".format(int(gobParam.damage)))
             self.currentplayer.DamagePlayer(int(gobParam.damage))
             return
 

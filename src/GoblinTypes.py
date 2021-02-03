@@ -7,7 +7,7 @@ class Slimy:
         self.statArmor = 0.7
         self.statHealth = 5
         self.statDamage = 3
-        self.appliedEffect = "slow"
+        self.appliedEffect = ("slow", 0.5)
 
 
 class Tough:
@@ -17,7 +17,7 @@ class Tough:
         self.statArmor = 0.5
         self.statHealth = 8
         self.statDamage = 8
-        self.appliedEffect = "none"
+        self.appliedEffect = None
 
 
 class Fast:
@@ -27,7 +27,7 @@ class Fast:
         self.statArmor = 1.2
         self.statHealth = 3
         self.statDamage = 1
-        self.appliedEffect = "none"
+        self.appliedEffect = None
 
 
 class Slow:
@@ -37,7 +37,7 @@ class Slow:
         self.statArmor = 0.8
         self.statHealth = 5
         self.statDamage = 5
-        self.appliedEffect = "none"
+        self.appliedEffect = None
 
 
 class Dumb:
@@ -47,7 +47,7 @@ class Dumb:
         self.statArmor = 1
         self.statHealth = 1
         self.statDamage = 1
-        self.appliedEffect = "none"
+        self.appliedEffect = None
 
 
 class Normal:
@@ -57,7 +57,7 @@ class Normal:
         self.statArmor = 1
         self.statHealth = 5
         self.statDamage = 5
-        self.appliedEffect = "none"
+        self.appliedEffect = None
 
 
 #Global Vars including Typelist

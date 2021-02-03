@@ -17,6 +17,7 @@ class Player:
         self.damage = strength
         self.goblinRep = gobRep
         self.isImmune = False
+        self.gobStatusEffect = None
         if (self.mainWeapon != None):
             self.EquipWeapon(equipWeapon)
         if (self.mainArmor != None):
@@ -55,6 +56,10 @@ class Player:
     
     def increaseAgl(self, Amount):
         self.agl = self.agl + Amount
+        if(self.mainArmor != None):
+            self.speed = self.mainArmor.statSpecial[1] * self.agl
+        else:
+            self.speed = self.agl
         print("----------Agility went up!---------------")
         return
 
@@ -97,13 +102,12 @@ class Player:
         self.mainArmor = item
         if(self.mainArmor != None):
             if(self.mainArmor.statSpecial[0] != "loose"):
-                self.speed = self.mainArmor.statSpecial[1] * self.agl
                 self.isImmune = False
-                return
             else:
-                self.speed = self.agl
+                
                 self.isImmune = True
-                return
+            self.speed = self.mainArmor.statSpecial[1] * self.agl
+            return
         else:
             self.speed = self.agl
             self.isImmune = False
@@ -137,6 +141,26 @@ class Player:
 
     def DropItem(self, newItemList):
         self.itemList = newItemList
+        return
+    
+    def SmitePlayer(self, spellType):
+        if(self.isImmune):
+            print("You are immune to spells.")
+            return
+        else:
+            if(spellType[0] == "slow"):
+                self.gobStatusEffect = spellType
+                if(self.mainArmor != None):
+                    if(random.randint(1, 100) >= self.mainArmor.statMagicProtectChance):
+                        self.speed = (self.mainArmor.statSpecial[1] * self.agl) * spellType[1]
+                        print("You are slowed!!")
+                        return
+                    else:
+                        print("Your armor absorbs the spell! No effect to you!")
+                        return
+                else:
+                    self.speed = self.agl * spellType[1]
+                    print("You are slowed!!")
         return
 
     def PayPlayer(self, Amount):

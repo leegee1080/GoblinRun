@@ -34,9 +34,12 @@ class Room:
                     except ValueError:
                         print("Invalid Command! (Needs to be a number.)")
                         continue
-                    if currentplayer.maxHealth >= playeranswer - currentplayer.health and playeranswer <= currentplayer.money:
-                        currentplayer.HealPlayer(playeranswer)
-                        currentplayer.money -= playeranswer
+                    if currentplayer.maxHealth >= playeranswer - currentplayer.health:
+                        if(playeranswer <= currentplayer.money):
+                            currentplayer.HealPlayer(playeranswer)
+                            currentplayer.money -= playeranswer
+                        else:
+                            print("You do not have enough gold to afford that.")
                     else:
                         print("You cannot heal more than your max health.")
             else:
@@ -183,6 +186,8 @@ class Room:
                                 if(item != None):
                                     self.TEMPLIST.append(item)
                             self.itemlist = self.TEMPLIST
+                    else:
+                        print("You do not have enough gold to afford that.")
                 except IndexError:
                     print("Invalid Item!")
                     continue
