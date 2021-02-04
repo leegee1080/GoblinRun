@@ -18,6 +18,7 @@ class Goblin:
         self.damage = GlobalGoblinVars.GlobalGoblinBaseStatsList["Dam"] + self.type.statDamage * (level/2)
         self.effect = self.type.appliedEffect
         self.alive = True
+        self.stunned = 0
 
     
     def printStatSheet(self):
@@ -37,3 +38,25 @@ class Goblin:
         if (self.health <= 0):
             print("You killed it!\n")
             self.alive = False
+
+    def stun(self, amount):
+        self.stunned = amount
+        return
+
+    def attack(self, targetPlayer):
+        if (self.health <= 0):
+            return
+            
+        if(self.stunned >0):
+            self.stunned -= 1
+            print("The level {} {} one is still stunned.".format(self.level, self.type.name))
+            return
+
+        print("\n~~~Level {} {} one attacks!~~~".format(self.level, self.type.name))
+        if(self.effect != None):
+            print("The goblin tries a {} spell for {} damage.\n".format(self.effect[0], int(self.damage)))
+            targetPlayer.SmitePlayer(self.effect)
+        else:
+            print("The goblin tries to hit you for {}\n".format(int(self.damage)))
+        targetPlayer.DamagePlayer(int(self.damage))
+        return

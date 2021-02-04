@@ -13,8 +13,8 @@ startingPlayerStrength = 5
 startingMoney = 20
 
 #----------------global vars----------------
-#player stat key(level, agility, startingHealth, strength, currentXp, XpToLevel, startingMoney, equipWeapon, equiparmor, itemList, gobRep) gobRep is higher the closer to '1' it gets
-CurrentPlayer = Player(startingPlayerLevel,startingPlayerAgility,startingPlayerHealth,startingPlayerStrength,0,1,startingMoney,None,None,[],4)
+#player stat key(level, agility, startingHealth, strength, currentXp, XpToLevel, startingMoney, equipWeapon, equipArmor, itemList, gobRep) gobRep is higher the closer to '1' it gets
+CurrentPlayer = Player(startingPlayerLevel,startingPlayerAgility,startingPlayerHealth,startingPlayerStrength,0,1,startingMoney,Weapon(startingPlayerLevel,difflevel),None,[],4)
 
 def dropItem():
     personalItemList = []

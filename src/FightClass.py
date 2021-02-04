@@ -69,7 +69,7 @@ class Fight:
 
     def Quick(self, gobTarget):
         print("You stab the level {} {} one with your {}.".format(gobTarget.level, gobTarget.type.name, self.currentplayer.mainWeapon.name))
-        print("Your combo for {:.0f} potential damage each hit!.\n".format(self.currentplayer.damage))
+        print("You combo for {:.0f} potential damage each hit!.\n".format(self.currentplayer.damage))
         self.counter = self.currentplayer.mainWeapon.statSpeed
         while(self.counter > 0):
             gobTarget.takedamage(self.currentplayer.damage)
@@ -78,17 +78,31 @@ class Fight:
 
     def Sweep(self, gobTarget):
         print("You sweep the level {} {} one with your {}.".format(gobTarget.level, gobTarget.type.name, self.currentplayer.mainWeapon.name))
-        print("You strike for {:.0f} potential damage!.\n".format(self.currentplayer.damage))
+        print("You strike it for {:.0f} potential damage!.\n".format(self.currentplayer.damage))
+        gobTarget.takedamage(self.currentplayer.damage)
+        self.SweepTargetList = []
+        for gob in self.gobList:
+            if(gob.level < gobTarget.level and gob.alive == True):
+                print("A {} goblin is caught in the sweep for {:.0f} potential damage!.\n".format(gob.type.name, self.currentplayer.damage))
+                gob.takedamage(self.currentplayer.damage)
         return
 
     def Heavy(self, gobTarget):
         print("You smash the level {} {} one with your {}.".format(gobTarget.level, gobTarget.type.name, self.currentplayer.mainWeapon.name))
-        print("You strike for {:.0f} potential damage!.\n".format(self.currentplayer.damage))
+        print("You strike it for {:.0f} potential damage!.\n".format(self.currentplayer.damage))
+        gobTarget.takedamage(self.currentplayer.damage)
+        self.SweepTargetList = []
+        for gob in self.gobList:
+            if(gob.level > gobTarget.level and gob.alive == True):
+                print("A {} goblin is caught in the shockwave for {:.0f} potential damage!.\n".format(gob.type.name, self.currentplayer.damage))
+                gob.takedamage(self.currentplayer.damage)
         return
 
     def Long(self, gobTarget):
         print("You spear the level {} {} one with your {}.".format(gobTarget.level, gobTarget.type.name, self.currentplayer.mainWeapon.name))
-        print("You hit for {:.0f} potential damage!.\n".format(self.currentplayer.damage))
+        print("You hit it for {:.0f} potential damage and it is pushed back!.\n".format(self.currentplayer.damage))
+        gobTarget.stun(self.currentplayer.mainWeapon.statPierce)
+        gobTarget.takedamage(self.currentplayer.damage)
         return
 
 
@@ -103,7 +117,7 @@ class Fight:
             "long": self.Long
         }
         self.playWepSpecial = self.currentplayer.mainWeapon.statSpecial
-        self.wepFunc = wepSwitch.get(self.playWepSpecial, default = None)
+        self.wepFunc = wepSwitch.get(self.playWepSpecial)
         if(self.wepFunc != None):
             self.wepFunc(newgobTarget)
         else:
@@ -145,17 +159,19 @@ class Fight:
         return
 
     def gobTurn(self, gobParam):
-        if (gobParam.health <= 0):
-            return
-        else:
-            print("\n~~~Level {} {} one attacks!~~~".format(gobParam.level, gobParam.type.name))
-            if(gobParam.effect != None):
-                print("The goblin tries a {} spell for {} damage.\n".format(gobParam.effect[0], int(gobParam.damage)))
-                self.currentplayer.SmitePlayer(gobParam.effect)
-            else:
-                print("The goblin tries to hit you for {}\n".format(int(gobParam.damage)))
-            self.currentplayer.DamagePlayer(int(gobParam.damage))
-            return
+        gobParam.attack(self.currentplayer)
+        return
+        # if (gobParam.health <= 0):
+        #     return
+        # else:
+        #     print("\n~~~Level {} {} one attacks!~~~".format(gobParam.level, gobParam.type.name))
+        #     if(gobParam.effect != None):
+        #         print("The goblin tries a {} spell for {} damage.\n".format(gobParam.effect[0], int(gobParam.damage)))
+        #         self.currentplayer.SmitePlayer(gobParam.effect)
+        #     else:
+        #         print("The goblin tries to hit you for {}\n".format(int(gobParam.damage)))
+        #     self.currentplayer.DamagePlayer(int(gobParam.damage))
+        #     return
 
     def runFight(self):
         self.turnCounter = self.TurnCounterMax

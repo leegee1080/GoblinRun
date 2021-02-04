@@ -91,7 +91,7 @@ class Player:
                 self.health = self.health - self.tempDam
                 return
             else:
-                print("!!!!!!!!!!!!!!!!!You dodge the goblin's attack!!!!!!!!!!!!!!!!!
+                print("!!!!!!!!!!!!!!!!!You dodge the goblin's attack!!!!!!!!!!!!!!!!!")
                 return
         else:
             print("!!!!!!!!!!!!!!!!!The goblin hits you for full damage!!!!!!!!!!!!!!!!!")
