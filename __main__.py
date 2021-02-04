@@ -79,8 +79,11 @@ def checkfornextroom():
             continue
         if(playeranswer == "y" or playeranswer == "Y" or playeranswer == "" or playeranswer == "" or playeranswer == "\\"):
             return True
-        else:
+        if(playeranswer == "n" or playeranswer == "N"):
             return False
+        else:
+            print("Please enter a valid answer.")
+            continue
 
 #Game Start
 print("GOBLIN RUN             ver: " + str(gameversion))

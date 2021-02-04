@@ -61,6 +61,51 @@ class Fight:
         else:
             return False
     
+    def NoSpecial(self, gobTarget):
+        print("You punch the level {} {} one with your fists.".format(gobTarget.level, gobTarget.type.name))
+        print("You strike for {:.0f} potential damage!.\n".format(self.currentplayer.damage))
+        gobTarget.takedamage(self.currentplayer.damage)
+        return
+
+    def Quick(self, gobTarget):
+        print("You stab the level {} {} one with your {}.".format(gobTarget.level, gobTarget.type.name, self.currentplayer.mainWeapon.name))
+        print("Your combo for {:.0f} potential damage each hit!.\n".format(self.currentplayer.damage))
+        return
+
+    def Sweep(self, gobTarget):
+        print("You sweep the level {} {} one with your {}.".format(gobTarget.level, gobTarget.type.name, self.currentplayer.mainWeapon.name))
+        print("You strike for {:.0f} potential damage!.\n".format(self.currentplayer.damage))
+        return
+
+    def Heavy(self, gobTarget):
+        print("You smash the level {} {} one with your {}.".format(gobTarget.level, gobTarget.type.name, self.currentplayer.mainWeapon.name))
+        print("You strike for {:.0f} potential damage!.\n".format(self.currentplayer.damage))
+        return
+
+    def Long(self, gobTarget):
+        print("You spear the level {} {} one with your {}.".format(gobTarget.level, gobTarget.type.name, self.currentplayer.mainWeapon.name))
+        print("You hit for {:.0f} potential damage!.\n".format(self.currentplayer.damage))
+        return
+
+
+    def CalculateWeaponSpecial(self, newgobTarget):
+        if(self.currentplayer.mainWeapon == None):
+            self.NoSpecial(newgobTarget)
+            return
+        wepSwitch = {
+            "quick": self.Quick,
+            "sweep": self.Sweep,
+            "heavy": self.Heavy,
+            "long": self.Long
+        }
+        self.playWepSpecial = self.currentplayer.mainWeapon.statSpecial
+        self.wepFunc = wepSwitch.get(self.playWepSpecial, default = None)
+        if(self.wepFunc != None):
+            self.wepFunc(newgobTarget)
+        else:
+            print("ERROR! Line 96! Tried to use a special that does not exist.")
+        return
+    
     def playerTurn(self):
         print("~~~Your Turn!~~~")
         self.counter = 0
@@ -92,9 +137,7 @@ class Fight:
             else:
                 print("Target is already dead.")
                 continue
-        print("You attack the level {} {} one.".format(self.gobList[self.playertargetInt].level, self.gobList[self.playertargetInt].type.name))
-        print("You strike {:.0f} potential damage!.\n".format(self.currentplayer.damage))
-        self.gobList[self.playertargetInt].takedamage(self.currentplayer.damage)
+        self.CalculateWeaponSpecial(self.gobList[self.playertargetInt])
         return
 
     def gobTurn(self, gobParam):
