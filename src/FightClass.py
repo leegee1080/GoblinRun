@@ -70,6 +70,10 @@ class Fight:
     def Quick(self, gobTarget):
         print("You stab the level {} {} one with your {}.".format(gobTarget.level, gobTarget.type.name, self.currentplayer.mainWeapon.name))
         print("Your combo for {:.0f} potential damage each hit!.\n".format(self.currentplayer.damage))
+        self.counter = self.currentplayer.mainWeapon.statSpeed
+        while(self.counter > 0):
+            gobTarget.takedamage(self.currentplayer.damage)
+            self.counter -= 1
         return
 
     def Sweep(self, gobTarget):
