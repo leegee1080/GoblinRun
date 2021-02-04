@@ -87,14 +87,14 @@ class Player:
         if(self.mainArmor != None):
             if(random.randint(1, 100) >= self.mainArmor.statWeaponProtectChance):
                 self.tempDam = (Amount*self.mainArmor.statProtection)
-                print("The goblin hits your armor but still does {} damage!".format(int(self.tempDam)))
+                print("!!!!!!!!!!!!!!!!!The goblin hits your armor but still does {} damage!!!!!!!!!!!!!!!!!".format(int(self.tempDam)))
                 self.health = self.health - self.tempDam
                 return
             else:
-                print("You dodge the goblin's attack!")
+                print("!!!!!!!!!!!!!!!!!You dodge the goblin's attack!!!!!!!!!!!!!!!!!
                 return
         else:
-            print("The goblin hits you for full damage!")
+            print("!!!!!!!!!!!!!!!!!The goblin hits you for full damage!!!!!!!!!!!!!!!!!")
             self.health -= Amount
         return
 
