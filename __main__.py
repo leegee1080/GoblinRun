@@ -4,7 +4,7 @@ from src.WeaponsClass import Weapon
 from src.ArmorClass import Armor
 from src.ConsumablesClass import Consumable
 
-gameversion = 0.8
+gameversion = 0.9
 difflevel = 1
 startingPlayerLevel = 1
 startingPlayerAgility = 10

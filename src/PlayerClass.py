@@ -56,9 +56,13 @@ class Player:
     
     def increaseAgl(self, Amount):
         self.agl = self.agl + Amount
-        if(self.mainArmor != None):
+        if(self.mainArmor != None and self.mainWeapon == None):
             self.speed = self.mainArmor.statSpecial[1] * self.agl
-        else:
+        if(self.mainArmor != None and self.mainWeapon != None):
+            self.speed = (self.mainWeapon.statSpeed + self.agl) * self.mainArmor.statSpecial[1]
+        if(self.mainArmor == None and self.mainWeapon != None):
+            self.speed = self.mainWeapon.statSpeed + self.agl
+        if(self.mainArmor == None and self.mainWeapon == None):
             self.speed = self.agl
         print("----------Agility went up!---------------")
         return

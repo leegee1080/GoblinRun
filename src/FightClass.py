@@ -64,7 +64,7 @@ class Fight:
     def NoSpecial(self, gobTarget):
         print("You punch the level {} {} one with your fists.".format(gobTarget.level, gobTarget.type.name))
         print("You strike for {:.0f} potential damage!.\n".format(self.currentplayer.damage))
-        gobTarget.takedamage(self.currentplayer.damage)
+        gobTarget.takedamage(self.currentplayer.damage, None)
         return
 
     def Quick(self, gobTarget):
@@ -72,37 +72,37 @@ class Fight:
         print("You combo for {:.0f} potential damage each hit!.\n".format(self.currentplayer.damage))
         self.counter = self.currentplayer.mainWeapon.statSpeed
         while(self.counter > 0):
-            gobTarget.takedamage(self.currentplayer.damage)
+            gobTarget.takedamage(self.currentplayer.damage, self.currentplayer.mainWeapon.statPierce)
             self.counter -= 1
         return
 
     def Sweep(self, gobTarget):
         print("You sweep the level {} {} one with your {}.".format(gobTarget.level, gobTarget.type.name, self.currentplayer.mainWeapon.name))
         print("You strike it for {:.0f} potential damage!.\n".format(self.currentplayer.damage))
-        gobTarget.takedamage(self.currentplayer.damage)
+        gobTarget.takedamage(self.currentplayer.damage, self.currentplayer.mainWeapon.statPierce)
         self.SweepTargetList = []
         for gob in self.gobList:
             if(gob.level < gobTarget.level and gob.alive == True):
                 print("A {} goblin is caught in the sweep for {:.0f} potential damage!.\n".format(gob.type.name, self.currentplayer.damage))
-                gob.takedamage(self.currentplayer.damage)
+                gob.takedamage(self.currentplayer.damage, self.currentplayer.mainWeapon.statPierce)
         return
 
     def Heavy(self, gobTarget):
         print("You smash the level {} {} one with your {}.".format(gobTarget.level, gobTarget.type.name, self.currentplayer.mainWeapon.name))
         print("You strike it for {:.0f} potential damage!.\n".format(self.currentplayer.damage))
-        gobTarget.takedamage(self.currentplayer.damage)
+        gobTarget.takedamage(self.currentplayer.damage, self.currentplayer.mainWeapon.statPierce)
         self.SweepTargetList = []
         for gob in self.gobList:
             if(gob.level > gobTarget.level and gob.alive == True):
                 print("A {} goblin is caught in the shockwave for {:.0f} potential damage!.\n".format(gob.type.name, self.currentplayer.damage))
-                gob.takedamage(self.currentplayer.damage)
+                gob.takedamage(self.currentplayer.damage, self.currentplayer.mainWeapon.statPierce)
         return
 
     def Long(self, gobTarget):
         print("You spear the level {} {} one with your {}.".format(gobTarget.level, gobTarget.type.name, self.currentplayer.mainWeapon.name))
         print("You hit it for {:.0f} potential damage and it is pushed back!.\n".format(self.currentplayer.damage))
         gobTarget.stun(self.currentplayer.mainWeapon.statPierce)
-        gobTarget.takedamage(self.currentplayer.damage)
+        gobTarget.takedamage(self.currentplayer.damage, self.currentplayer.mainWeapon.statPierce)
         return
 
 

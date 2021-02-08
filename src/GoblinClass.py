@@ -31,13 +31,17 @@ class Goblin:
         print("Effect: " + str(self.effect))
         return
 
-    def takedamage(self, amount):
-        self.tempDam = (amount*self.armor)
-        print("The goblin takes {}.".format(int(self.tempDam)))
-        self.health -= self.tempDam
-        if (self.health <= 0):
-            print("You killed it!\n")
-            self.alive = False
+    def takedamage(self, amount, pierce):
+        if(self.alive == True):
+            if(pierce != None):
+                self.tempDam = (amount * (self.armor * (pierce/4)))
+            else:
+                self.tempDam = (amount * self.armor)
+            print("The goblin takes {}.".format(int(self.tempDam)))
+            self.health -= self.tempDam
+            if (self.health <= 0):
+                print("You killed it!\n")
+                self.alive = False
 
     def stun(self, amount):
         self.stunned = amount
