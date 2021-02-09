@@ -4,7 +4,7 @@ from src.WeaponsClass import Weapon
 from src.ArmorClass import Armor
 from src.ConsumablesClass import Consumable
 
-gameversion = 0.9
+gameversion = 1.0
 difflevel = 1
 startingPlayerLevel = 1
 startingPlayerAgility = 10
@@ -14,65 +14,21 @@ startingMoney = 20
 
 #----------------global vars----------------
 #player stat key(level, agility, startingHealth, strength, currentXp, XpToLevel, startingMoney, equipWeapon, equipArmor, itemList, gobRep) gobRep is higher the closer to '1' it gets
-CurrentPlayer = Player(startingPlayerLevel,startingPlayerAgility,startingPlayerHealth,startingPlayerStrength,0,1,startingMoney,Weapon(startingPlayerLevel,difflevel),None,[],4)
-
-def dropItem():
-    personalItemList = []
-    if(CurrentPlayer.mainWeapon != None):
-        personalItemList.append(CurrentPlayer.mainWeapon)
-    if(CurrentPlayer.mainArmor != None):
-        personalItemList.append(CurrentPlayer.mainArmor)
-    for item in CurrentPlayer.itemList:
-        personalItemList.append(item)
-    if(len(personalItemList) <= 0):
-        print("--------Your bag is empty--------\n")
-        return
-    itemcounter = 1
-    for item in personalItemList:
-        print("{}-> Your {} can be dropped".format(itemcounter, item.name))
-        itemcounter += 1
-    while(True):
-        playerinputstring = input("Which item would you like to drop? (type a number from '1' to '{}') (Type 'q' to go back.)".format(len(personalItemList)))
-        if(playerinputstring == "q" or playerinputstring == "Q" or playerinputstring == "quit" or playerinputstring == "Quit" or playerinputstring == "QUIT"):
-            break
-        try:
-            playertargetInt = int(playerinputstring) -1
-            pass
-        except ValueError:
-            print("Invalid Command!")
-            continue
-        try:
-            chosenitem = personalItemList[playertargetInt]
-            if(chosenitem.cat == "w"):
-                CurrentPlayer.DiscardWeapon()
-                print("You drop your {}.".format(chosenitem.name))
-                CurrentPlayer.PayPlayer(int(chosenitem.moneyvalue / CurrentPlayer.goblinRep))
-            if(chosenitem.cat == "a"):
-                CurrentPlayer.DoffArmor()
-                print("You drop your {}.".format(chosenitem.name))
-                CurrentPlayer.PayPlayer(int(chosenitem.moneyvalue / CurrentPlayer.goblinRep))
-            if(chosenitem.cat == "c"):
-                print("You drop the {} from your bag.".format(chosenitem.name))
-                CurrentPlayer.PayPlayer(int(chosenitem.moneyvalue / CurrentPlayer.goblinRep))
-                personalItemList[playertargetInt] = None
-                TempList = []
-                for item in personalItemList:
-                    if(item != None and item.cat == "c"):
-                        TempList.append(item)
-                CurrentPlayer.DropItem(TempList)
-        except IndexError:
-            print("Invalid Item!")
-            continue
-        return
+CurrentPlayer = Player(startingPlayerLevel,startingPlayerAgility,startingPlayerHealth,startingPlayerStrength,0,1,startingMoney,Weapon(startingPlayerLevel,difflevel),None,[Consumable(startingPlayerLevel,difflevel)],4)
 
 def checkfornextroom():
     while(True):
         playeranswer = input("Would you like to continue? \n (Type 'y' for yes or 'n' for no, 'stat' for your current stats, or 'bag' for your current items.)")
         if(playeranswer == "bag" or playeranswer == "Bag" or playeranswer == "BAG"):
             CurrentPlayer.printItemList()
+            if(len(CurrentPlayer.itemList) > 0):
+                playeranswer = input("\nWould you like to use an item?")
+                if(playeranswer == "y" or playeranswer == "Y"):
+                    CurrentPlayer.UsePot()
+                    continue
             playeranswer = input("\nWould you like to drop an item?")
             if(playeranswer == "y" or playeranswer == "Y"):
-                dropItem()
+                CurrentPlayer.dropItem()
             continue
         if(playeranswer == "stat" or playeranswer == "Stat" or playeranswer == "STAT"):
             CurrentPlayer.printStatSheet()

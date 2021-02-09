@@ -10,17 +10,17 @@ class DamagePot:
         self.name = "Strength Potion"
         self.Factor = 1
         self.moneyvalue = 10
-        self.statSpecial = "damage"
+        self.statSpecial = "damage boost"
 
-class ImmuPot:
+class MagImmuPot:
     def __init__(self):
-        self.name = "Immunity Potion"
+        self.name = "Magic Immunity Potion"
         self.Factor = 1
         self.moneyvalue = 10
-        self.statSpecial = "immune"
+        self.statSpecial = "magic immune"
 
 #Global Vars including Typelist
 class ConsumablesGlobalVars:
     ConsumableBaseFactor = 0
     ConsumableBasemoneyvalue = 0
-    GlobalConsumableTypesList = [HealthPot(), DamagePot(), ImmuPot()]
+    GlobalConsumableTypesList = [HealthPot(), DamagePot(), MagImmuPot()]

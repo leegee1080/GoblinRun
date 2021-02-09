@@ -63,46 +63,56 @@ class Fight:
     
     def NoSpecial(self, gobTarget):
         print("You punch the level {} {} one with your fists.".format(gobTarget.level, gobTarget.type.name))
-        print("You strike for {:.0f} potential damage!.\n".format(self.currentplayer.damage))
-        gobTarget.takedamage(self.currentplayer.damage, None)
+        if(self.currentplayer.nextHitDamageBoost > 0):
+            print("Your damage is boosted by {} points".format(self.currentplayer.nextHitDamageBoost))
+        print("You strike for {:.0f} potential damage!.\n".format(self.currentplayer.damage + self.currentplayer.nextHitDamageBoost))
+        gobTarget.takedamage(self.currentplayer.damage + self.currentplayer.nextHitDamageBoost, None)
         return
 
     def Quick(self, gobTarget):
         print("You stab the level {} {} one with your {}.".format(gobTarget.level, gobTarget.type.name, self.currentplayer.mainWeapon.name))
-        print("You combo for {:.0f} potential damage each hit!.\n".format(self.currentplayer.damage))
+        if(self.currentplayer.nextHitDamageBoost > 0):
+            print("Your damage is boosted by {} points".format(self.currentplayer.nextHitDamageBoost))
+        print("You combo for {:.0f} potential damage each hit!.\n".format(self.currentplayer.damage + self.currentplayer.nextHitDamageBoost))
         self.counter = self.currentplayer.mainWeapon.statSpeed
         while(self.counter > 0):
-            gobTarget.takedamage(self.currentplayer.damage, self.currentplayer.mainWeapon.statPierce)
+            gobTarget.takedamage(self.currentplayer.damage + self.currentplayer.nextHitDamageBoost, self.currentplayer.mainWeapon.statPierce)
             self.counter -= 1
         return
 
     def Sweep(self, gobTarget):
         print("You sweep the level {} {} one with your {}.".format(gobTarget.level, gobTarget.type.name, self.currentplayer.mainWeapon.name))
+        if(self.currentplayer.nextHitDamageBoost > 0):
+            print("Your damage is boosted by {} points".format(self.currentplayer.nextHitDamageBoost))
         print("You strike it for {:.0f} potential damage!.\n".format(self.currentplayer.damage))
-        gobTarget.takedamage(self.currentplayer.damage, self.currentplayer.mainWeapon.statPierce)
+        gobTarget.takedamage(self.currentplayer.damage + self.currentplayer.nextHitDamageBoost, self.currentplayer.mainWeapon.statPierce)
         self.SweepTargetList = []
         for gob in self.gobList:
             if(gob.level < gobTarget.level and gob.alive == True):
-                print("A {} goblin is caught in the sweep for {:.0f} potential damage!.\n".format(gob.type.name, self.currentplayer.damage))
-                gob.takedamage(self.currentplayer.damage, self.currentplayer.mainWeapon.statPierce)
+                print("A {} goblin is caught in the sweep for {:.0f} potential damage!.\n".format(gob.type.name, self.currentplayer.damage + self.currentplayer.nextHitDamageBoost))
+                gob.takedamage(self.currentplayer.damage + self.currentplayer.nextHitDamageBoost, self.currentplayer.mainWeapon.statPierce)
         return
 
     def Heavy(self, gobTarget):
         print("You smash the level {} {} one with your {}.".format(gobTarget.level, gobTarget.type.name, self.currentplayer.mainWeapon.name))
+        if(self.currentplayer.nextHitDamageBoost > 0):
+            print("Your damage is boosted by {} points".format(self.currentplayer.nextHitDamageBoost))
         print("You strike it for {:.0f} potential damage!.\n".format(self.currentplayer.damage))
-        gobTarget.takedamage(self.currentplayer.damage, self.currentplayer.mainWeapon.statPierce)
+        gobTarget.takedamage(self.currentplayer.damage + self.currentplayer.nextHitDamageBoost, self.currentplayer.mainWeapon.statPierce)
         self.SweepTargetList = []
         for gob in self.gobList:
             if(gob.level > gobTarget.level and gob.alive == True):
-                print("A {} goblin is caught in the shockwave for {:.0f} potential damage!.\n".format(gob.type.name, self.currentplayer.damage))
-                gob.takedamage(self.currentplayer.damage, self.currentplayer.mainWeapon.statPierce)
+                print("A {} goblin is caught in the shockwave for {:.0f} potential damage!.\n".format(gob.type.name, self.currentplayer.damage + self.currentplayer.nextHitDamageBoost))
+                gob.takedamage(self.currentplayer.damage + self.currentplayer.nextHitDamageBoost, self.currentplayer.mainWeapon.statPierce)
         return
 
     def Long(self, gobTarget):
         print("You spear the level {} {} one with your {}.".format(gobTarget.level, gobTarget.type.name, self.currentplayer.mainWeapon.name))
-        print("You hit it for {:.0f} potential damage and it is pushed back!.\n".format(self.currentplayer.damage))
+        if(self.currentplayer.nextHitDamageBoost > 0):
+            print("Your damage is boosted by {} points".format(self.currentplayer.nextHitDamageBoost))
+        print("You hit it for {:.0f} potential damage and it is pushed back!.\n".format(self.currentplayer.damage + self.currentplayer.nextHitDamageBoost))
         gobTarget.stun(self.currentplayer.mainWeapon.statPierce)
-        gobTarget.takedamage(self.currentplayer.damage, self.currentplayer.mainWeapon.statPierce)
+        gobTarget.takedamage(self.currentplayer.damage + self.currentplayer.nextHitDamageBoost, self.currentplayer.mainWeapon.statPierce)
         return
 
 
@@ -121,11 +131,12 @@ class Fight:
         if(self.wepFunc != None):
             self.wepFunc(newgobTarget)
         else:
-            print("ERROR! Line 96! Tried to use a special that does not exist.")
+            print("ERROR (Line 96) Tried to use a special that does not exist.")
         return
     
     def playerTurn(self):
         print("~~~Your Turn!~~~")
+        self.currentplayer.TickDownPotEffects()
         self.counter = 0
         self.gobString = ""
         while (self.counter < self.numberofGobs):
@@ -134,9 +145,17 @@ class Fight:
             self.counter += 1
         print(self.gobString)
         while(True):
-            self.playerinputstring = input("Which Goblin do you target? (1 to {}) (Type 'stat' to see your stats)".format(len(self.gobList)))
+            self.playerinputstring = input("Which Goblin do you target? (1 to {}) (Type 'stat' to see your stats or 'bag' for your current items.)".format(len(self.gobList)))
             if(self.playerinputstring == "stat" or self.playerinputstring == "Stat" or self.playerinputstring == "STAT"):
                 self.currentplayer.printStatSheet()
+                continue
+            if(self.playerinputstring == "bag" or self.playerinputstring == "Bag" or self.playerinputstring == "BAG"):
+                self.currentplayer.printItemList()
+                if(len(self.currentplayer.itemList) > 0):
+                    playeranswer = input("\nWould you like to use an item?")
+                    if(playeranswer == "y" or playeranswer == "Y"):
+                        self.currentplayer.UsePot()
+                    continue
                 continue
             try:
                 self.playertargetInt = int(self.playerinputstring) -1
@@ -161,17 +180,6 @@ class Fight:
     def gobTurn(self, gobParam):
         gobParam.attack(self.currentplayer)
         return
-        # if (gobParam.health <= 0):
-        #     return
-        # else:
-        #     print("\n~~~Level {} {} one attacks!~~~".format(gobParam.level, gobParam.type.name))
-        #     if(gobParam.effect != None):
-        #         print("The goblin tries a {} spell for {} damage.\n".format(gobParam.effect[0], int(gobParam.damage)))
-        #         self.currentplayer.SmitePlayer(gobParam.effect)
-        #     else:
-        #         print("The goblin tries to hit you for {}\n".format(int(gobParam.damage)))
-        #     self.currentplayer.DamagePlayer(int(gobParam.damage))
-        #     return
 
     def runFight(self):
         self.turnCounter = self.TurnCounterMax

@@ -37,7 +37,7 @@ class Goblin:
                 self.tempDam = (amount * (self.armor * (pierce/4)))
             else:
                 self.tempDam = (amount * self.armor)
-            print("The goblin takes {}.".format(int(self.tempDam)))
+            print("That goblin takes {} damage.".format(int(self.tempDam)))
             self.health -= self.tempDam
             if (self.health <= 0):
                 print("You killed it!\n")

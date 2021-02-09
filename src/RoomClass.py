@@ -19,6 +19,14 @@ class Room:
             playeranswer = input("Would you like to spend some money and heal more? \n (Type 'y' for yes or 'n' for no, 'stat' for your current stats, or 'bag' for your current items.)")
             if(playeranswer == "bag" or playeranswer == "Bag" or playeranswer == "BAG"):
                 currentplayer.printItemList()
+                if(len(currentplayer.itemList) > 0):
+                    playeranswer = input("\nWould you like to use an item?")
+                    if(playeranswer == "y" or playeranswer == "Y"):
+                        currentplayer.UsePot()
+                    continue
+                playeranswer = input("\nWould you like to drop an item?")
+                if(playeranswer == "y" or playeranswer == "Y"):
+                    currentplayer.dropItem()
                 continue
             if(playeranswer == "stat" or playeranswer == "Stat" or playeranswer == "STAT"):
                 currentplayer.printStatSheet()
@@ -77,6 +85,14 @@ class Room:
                     break
                 if(self.playerinputstring == "bag" or self.playerinputstring == "Bag" or self.playerinputstring == "BAG"):
                     self.currentplayer.printItemList()
+                    if(len(currentplayer.itemList) > 0):
+                        playeranswer = input("\nWould you like to use an item?")
+                        if(playeranswer == "y" or playeranswer == "Y"):
+                            currentplayer.UsePot()
+                        continue
+                    playeranswer = input("\nWould you like to drop an item?")
+                    if(playeranswer == "y" or playeranswer == "Y"):
+                        currentplayer.dropItem()
                     continue
                 try:
                     self.playertargetInt = int(self.playerinputstring) -1
@@ -257,6 +273,7 @@ class Room:
                         if(item != None and item.cat == "c"):
                             self.TempList.append(item)
                     curplay.DropItem(self.TempList)
+                break
             except IndexError:
                 print("Invalid Item!")
                 continue
