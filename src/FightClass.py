@@ -61,7 +61,7 @@ class Fight:
         else:
             return False
     
-    def NoSpecial(self, gobTarget):
+    def noSpecial(self, gobTarget):
         print("You punch the level {} {} one with your fists.".format(gobTarget.level, gobTarget.type.name))
         if(self.currentplayer.nextHitDamageBoost > 0):
             print("Your damage is boosted by {} points".format(self.currentplayer.nextHitDamageBoost))
@@ -118,7 +118,7 @@ class Fight:
 
     def CalculateWeaponSpecial(self, newgobTarget):
         if(self.currentplayer.mainWeapon == None):
-            self.NoSpecial(newgobTarget)
+            self.noSpecial(newgobTarget)
             return
         wepSwitch = {
             "quick": self.Quick,
