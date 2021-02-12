@@ -15,11 +15,14 @@ class Armor:
         self.moneyvalue = (self.type.moneyvalue + ArmorGlobalVars.ArmorBasemoneyvalue) * self. mod[1]
         self.statSpecial = self.type.statSpecial
     
-    def printStatSheet(self):
-        print("Type: " + self.name)
-        print("Protection: " + str(self.statProtection))
-        print("WeaponProtectChance: " + str(self.statWeaponProtectChance))
-        print("MagicProtectChance: " + str(self.statMagicProtectChance))
-        print("Effect: " + str(self.statSpecial))
-        print("Value: " + str(self.moneyvalue))
-        return
+    def __str__(self):
+        return f"Type: {self.name}\nProtection: {self.statProtection}\nWeaponProtectChance: {self.statWeaponProtectChance}\nMagicProtectChance: {self.statMagicProtectChance}\nEffect: {self.statSpecial}\nValue: {self.moneyvalue}"
+
+    # def printStatSheet(self):
+    #     print("Type: " + self.name)
+    #     print("Protection: " + str(self.statProtection))
+    #     print("WeaponProtectChance: " + str(self.statWeaponProtectChance))
+    #     print("MagicProtectChance: " + str(self.statMagicProtectChance))
+    #     print("Effect: " + str(self.statSpecial))
+    #     print("Value: " + str(self.moneyvalue))
+    #     return

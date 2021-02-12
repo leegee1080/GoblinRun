@@ -29,7 +29,6 @@ class Player:
         if (self.mainArmor != None):
             self.DonArmor(equipArmor)
 
-    
     def printStatSheet(self):
         print("--------------Player Stats-------------")
         print("----------Level: " + str(self.level))

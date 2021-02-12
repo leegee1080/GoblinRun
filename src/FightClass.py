@@ -137,13 +137,16 @@ class Fight:
     def playerTurn(self):
         print("~~~Your Turn!~~~")
         self.currentplayer.TickDownPotEffects()
-        self.counter = 0
-        self.gobString = ""
-        while (self.counter < self.numberofGobs):
-            self.gobString = self.gobString + "{}--> The level {} {} one. {}".format(self.counter + 1, self.gobList[self.counter].level, self.gobList[self.counter].type.name, "(Dead)" if self.gobList[self.counter].health <= 0 else "")
-            self.gobString += "\n"
-            self.counter += 1
-        print(self.gobString)
+        # self.counter = 0
+        # self.gobString = ""
+        for index, gob in enumerate(self.gobList, start=1):
+            print("{}--> The level {} {} one. {}".format(index, gob.level, gob.type.name, "(Dead)" if gob.health <= 0 else ""))
+        # while (self.counter < self.numberofGobs):
+        #     self.gobString = self.gobString + "{}--> The level {} {} one. {}".format(self.counter + 1, self.gobList[self.counter].level, self.gobList[self.counter].type.name, "(Dead)" if self.gobList[self.counter].health <= 0 else "")
+        #     self.gobString += "\n"
+        #     self.counter += 1
+        # print(self.gobString)
+        print("\n")
         while(True):
             self.playerinputstring = input("Which Goblin do you target? (1 to {}) (Type 'stat' to see your stats or 'bag' for your current items.)".format(len(self.gobList)))
             if(self.playerinputstring == "stat" or self.playerinputstring == "Stat" or self.playerinputstring == "STAT"):

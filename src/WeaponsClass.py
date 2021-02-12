@@ -15,11 +15,14 @@ class Weapon:
         self.moneyvalue = (self.type.moneyvalue + WeaponGlobalVars.WeaponBasemoneyvalue) * self. mod[1]
         self.statSpecial = self.type.statSpecial
     
-    def printStatSheet(self):
-        print("Type: " + self.name)
-        print("Speed: " + str(self.statSpeed))
-        print("Pierce: " + str(self.statPierce))
-        print("Damage: " + str(self.statDamage))
-        print("Effect: " + str(self.statSpecial))
-        print("Value: " + str(self.moneyvalue))
-        return
+    def __str__(self):
+        return f"Type: {self.name}\nSpeed: {self.statSpeed}\nPierce: {self.statPierce}\nDamage: {self.statDamage}\nEffect: {self.statSpecial}\nValue: {self.moneyvalue}"
+
+    # def printStatSheet(self):
+    #     print("Type: " + self.name)
+    #     print("Speed: " + str(self.statSpeed))
+    #     print("Pierce: " + str(self.statPierce))
+    #     print("Damage: " + str(self.statDamage))
+    #     print("Effect: " + str(self.statSpecial))
+    #     print("Value: " + str(self.moneyvalue))
+    #     return

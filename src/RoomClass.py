@@ -73,11 +73,13 @@ class Room:
         if(len(self.itemlist) >0):
             print("You also find {} item{}.".format(len(self.itemlist),  "s" if len(self.itemlist) != 1 else ""))
             #print itemlist
-            self.itemcounter = 1
-            for item in self.itemlist:
-                print("{}-> {}".format(self.itemcounter, item.name))
-                self.itemcounter += 1
+            for index, item in enumerate(self.itemlist, start=1):
+                print("{}-> {}.".format(index, item.name))
             print("\n")
+            # self.itemcounter = 1
+            # for item in self.itemlist:
+            #     print("{}-> {}".format(self.itemcounter, item.name))
+            #     self.itemcounter += 1
             while(True):
                 self.playerinputstring = input("Which item would you like to take? (type a number from '1' to '{}') (Type 'bag' to see your stats or 'q' to leave)".format(len(self.itemlist)))
                 if(self.playerinputstring == "q" or self.playerinputstring == "Q" or self.playerinputstring == "quit" or self.playerinputstring == "Quit" or self.playerinputstring == "QUIT"):
@@ -131,11 +133,13 @@ class Room:
                     print("There are no more items here.\n")
                     break
                 #reprint itemlist
-                self.itemcounter = 1
+                # self.itemcounter = 1
                 print("\nStill {} item{} here.".format(len(self.itemlist),  "s" if len(self.itemlist) != 1 else ""))
-                for item in self.itemlist:
-                    print("{}-> {}".format(self.itemcounter, item.name))
-                    self.itemcounter += 1
+                for index, item in enumerate(self.itemlist, start=1):
+                    print("{}-> {}.".format(index, item.name))
+                # for item in self.itemlist:
+                #     print("{}-> {}".format(self.itemcounter, item.name))
+                #     self.itemcounter += 1
                 print("\n")
         print("\n")
         return
@@ -151,10 +155,12 @@ class Room:
             print("\nYou find a friendly goblin, he seems to have a shop.")
             print("He has {} item{}.".format(len(self.itemlist),  "s" if len(self.itemlist) != 1 else ""))
             #print itemlist
-            self.itemcounter = 1
-            for item in self.itemlist:
-                print("{}-> {} is being sold for {} gold".format(self.itemcounter, item.name, int(item.moneyvalue)))
-                self.itemcounter += 1
+            for index, item in enumerate(self.itemlist, start=1):
+                print("{}-> {} is being sold for {} gold".format(index, item.name, int(item.moneyvalue)))
+            # self.itemcounter = 1
+            # for item in self.itemlist:
+            #     print("{}-> {} is being sold for {} gold".format(self.itemcounter, item.name, int(item.moneyvalue)))
+            #     self.itemcounter += 1
             print("\n")
             while(True):
                 self.playerinputstring = input("Which item would you like to buy? (type a number from '1' to '{}') (Type 'bag' to see your bag, 'sell' to sell an item, or 'q' to leave)".format(len(self.itemlist)))
@@ -218,11 +224,13 @@ class Room:
                     print("There are no more items for sale.\n")
                     break
                 #reprint itemlist
-                self.itemcounter = 1
+                # self.itemcounter = 1
                 print("\nStill {} item{} for sale.".format(len(self.itemlist),  "s" if len(self.itemlist) != 1 else ""))
-                for item in self.itemlist:
-                    print("{}-> {}".format(self.itemcounter, item.name))
-                    self.itemcounter += 1
+                # for item in self.itemlist:
+                #     print("{}-> {}".format(self.itemcounter, item.name))
+                #     self.itemcounter += 1
+                for index, item in enumerate(self.itemlist, start=1):
+                    print("{}-> {} is being sold for {} gold".format(index, item.name, int(item.moneyvalue)))
                 print("\n")
         else:
             print("\nThis seems to be an empty room.")      
@@ -239,10 +247,12 @@ class Room:
         if(len(self.personalItemList) <= 0):
             print("--------Your bag is empty--------\n")
             return
-        self.itemcounter = 1
-        for item in self.personalItemList:
-            print("{}-> Your {} can be sold for {} gold".format(self.itemcounter, item.name, int(item.moneyvalue)))
-            self.itemcounter += 1
+        for index, item in enumerate(self.personalItemList, start=1):
+            print("{}-> Your {} can be sold for {} gold".format(index, item.name, int(item.moneyvalue)))
+        # self.itemcounter = 1
+        # for item in self.personalItemList:
+        #     print("{}-> Your {} can be sold for {} gold".format(self.itemcounter, item.name, int(item.moneyvalue)))
+        #     self.itemcounter += 1
         while(True):
             self.playerinputstring = input("Which item would you like to sell? (type a number from '1' to '{}') (Type 'q' to go back.)".format(len(self.personalItemList)))
             if(self.playerinputstring == "q" or self.playerinputstring == "Q" or self.playerinputstring == "quit" or self.playerinputstring == "Quit" or self.playerinputstring == "QUIT"):

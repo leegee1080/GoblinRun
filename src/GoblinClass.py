@@ -20,16 +20,18 @@ class Goblin:
         self.alive = True
         self.stunned = 0
 
-    
-    def printStatSheet(self):
-        print("Type: " + self.type.name)
-        print("Level: " + str(self.level))
-        print("Speed: " + str(self.speed))
-        print("Armor: " + str(self.armor))
-        print("Health: " + str(self.health))
-        print("Damage: " + str(self.damage))
-        print("Effect: " + str(self.effect))
-        return
+    def __str__(self):
+        return f"Type: {self.type.name}\nLevel: {self.level}\nSpeed: {self.speed}\nArmor: {self.armor}\nHealth: {self.health}\nDamage: {self.damage}\nEffect: {self.effect}"
+
+    # def printStatSheet(self):
+    #     print("Type: " + self.type.name)
+    #     print("Level: " + str(self.level))
+    #     print("Speed: " + str(self.speed))
+    #     print("Armor: " + str(self.armor))
+    #     print("Health: " + str(self.health))
+    #     print("Damage: " + str(self.damage))
+    #     print("Effect: " + str(self.effect))
+    #     return
 
     def takedamage(self, amount, pierce):
         if(self.alive == True):
